@@ -1,0 +1,827 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for SIMCardComponent\common\errorCodeTable.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../index.html">all files</a> / <a href="index.html">SIMCardComponent/common/</a> errorCodeTable.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">97.87% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>46/47</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">75% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>12/16</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">75% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>3/4</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">97.83% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>45/46</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line high'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">166×</span>
+<span class="cline-any cline-yes">51×</span>
+<span class="cline-any cline-yes">51×</span>
+<span class="cline-any cline-yes">51×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">51×</span>
+<span class="cline-any cline-yes">51×</span>
+<span class="cline-any cline-yes">53×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">51×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">166×</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-yes">11×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">166×</span>
+<span class="cline-any cline-yes">16×</span>
+<span class="cline-any cline-yes">16×</span>
+<span class="cline-any cline-yes">16×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">16×</span>
+<span class="cline-any cline-yes">16×</span>
+<span class="cline-any cline-yes">19×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">16×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">64×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">"use strict";
+var assert = require('assert');
+&nbsp;
+var errorCodeTable= {
+    version: 'v1.0.0',
+    updated: '2015-11-05 9:30am',
+&nbsp;
+    //1001~1500 为参数错误系列
+    1001: 'Missing email.',
+    1002: 'Missing first name.',
+    1003: 'Missing last name.',
+    1004: 'Missing name.',
+    1005: 'Missing birthday.',
+    1006: 'Missing password.',
+    1007: 'Missing gender.',
+    1008: 'Missing clientId.',
+    1009: 'Missing event.',
+    1010: 'Missing ref.',
+    1011: 'Missing userId.',
+    1012: 'Missing host.',
+    1013: 'Missing featured.',
+    1014: 'Missing admin.',
+    1015: 'Missing utcDateTime.',
+    1016: 'Missing date.',
+    1017: 'Missing frequency.',
+    1018: 'Missing days to repeat on.',
+    1019: 'Missing users to invite.',
+    1020: 'Missing allow.',
+    1021: 'Missing to.',
+    1022: 'Missing from.',
+    1023: 'Missing type.',
+    1024: 'Missing postalCode.',
+    1025: 'Missing region.',
+    1026: 'Missing locality.',
+    1027: 'Missing address.',
+    1028: 'Missing longitude.',
+    1029: 'Missing latitude.',
+    1030: 'Missing loc.',
+    1032: 'Missing description.',
+    1033: 'Missing mode.',
+    1034: 'Missing venue.',
+    1035: 'Missing cover.',
+    1036: 'Missing avatar.',
+    1037: 'Missing userName.',
+    1038: 'All events are created for that date range already.',
+    1039: 'Missing message.',
+    1040: 'Missing endsOn.',
+    1041: 'Missing access.',
+    1042: 'Missing mobile.',
+    1043: 'Missing code.',
+    1044: 'Missing account.',
+    1045: 'Missing id.',
+    1046: 'Missing provinceId.',
+    1047: 'Missing cityId.',
+    1048: 'Missing businessLicense.',
+    1049: 'Missing value',
+    1050: 'Missing bankCardAccount', //银行卡信息丢失
+    1051: 'Missing beneficiaryBank', //开户行信息丢失
+    1052: 'Missing username',
+    1053: 'Missing authorization',
+&nbsp;
+    //1501~2000  为资源访问错误
+    1501: 'Event does not exist.',
+    1502: 'User does not exist.',
+    1503: 'Venue does not exist.',
+    1504: 'Precheckin does not exist.',
+    1505: 'Hype does not exist.',
+    1506: 'Follow does not exist.',
+    1507: 'Request does not exist.',
+    1508: 'Post does not exist.',
+    1509: 'Uname does not exist.',
+    1510: 'Recurring does not exist.',
+    1511: 'Moment does not exist.',
+    1512: 'Venue or User username does not exist.',
+    1513: 'Activity does not exist.',
+    1514: 'Mobile does not exist.',
+    1515: 'Value does not exist.',
+&nbsp;
+    1599: 'Resources does not exist.',
+&nbsp;
+    //2001~3000 为重复多次请求错误
+    2001: 'Duplicate email',
+    2010: 'Duplicate hype',
+    2011: 'Duplicate user name',
+    2012: 'Duplicate recurring events.',
+&nbsp;
+    //3001~4000 为参数格式错误
+    3001: 'Incorrect email format.',
+    3002: 'Incorrect password format.',
+    3003: 'Incorrect birthday format',
+    3004: 'Password complexity not met.',
+    3005: 'Incorrect date format.',
+    3006: 'Incorrect user name format.',
+    3007: 'Incorrect mobile format.',
+    3010: 'Incorrect value format.',
+    3500: 'Incorrect uuid format.',
+&nbsp;
+    3999: 'Incorrect data format.',
+&nbsp;
+    //4500~5000 为认证权限许可类错误
+    4500: 'Permission denied to view event.',
+    4501: 'Permission denied to view user.',
+    4502: 'Permission denied to view venue.',
+    4503: 'Permission denied to delete event.',
+    4504: 'Permission denied to delete user.',
+    4505: 'Permission denied to delete venue.',
+    4506: 'Permission denied. Account does not have access to web.',
+    4507: 'Permission denied. Account does not have access to iOS.',
+    4508: 'Permission denied to post with this event.',
+    4509: 'Permission denied.',
+    4510: 'Permission denied to hype with this event.',
+    4511: 'Permission denied to update this event.',
+    4512: 'Permission denied to remove host from this event.',
+    4513: 'Permission denied to remove featured from this event.',
+    4514: 'Permission denied to remove admin from this event.',
+    4515: 'Permission denied to post with this venue.',
+    4516: 'Permission denied to update this venue.',
+    4517: 'Permission denied to hype with this venue.',
+    4518: 'Permission denied to remove admin from this venue.',
+    4519: 'Permission denied. Event is private.',
+    4520: 'Permission denied to push to venue followers. You must be an admin.',
+    4521: 'Permission denied to push to venue followers. You must be an admin.',
+    4522: 'Permission denied to delete event. You can only delete an event if it was created in the last 24 hours.',
+    4523: 'Permission denied to change username. You can only change your username before 24 hours after creation.',
+&nbsp;
+    //5000~5999 为基础硬件、第三方资源错误
+    5000: 'API Down',
+    5001: 'Database Down',
+    5002: 'Website Down',
+    5003: 'Redis Down',
+    5004: 'S3 Down',
+    5005: 'Timeout',
+    5006: 'TSP Down',
+    5007: 'TSI Down',
+    5008: 'BOSS Down',
+    5100: 'Database server instruction execution fail.',
+&nbsp;
+    //7000~7999 为业务类逻辑错误
+    7000: 'Cannot precheckin to venue.',
+    7001: 'Precheckin exists already.',
+    7002: 'You are not old enough to use this application.',
+    7003: 'Account not activated yet. We are only letting in a few users during the phase of release.',
+    7004: 'You\'re not an admin.',
+    7005: 'You cannot hype yourself.',
+    7006: 'Hype exists already.',
+    7007: 'You cannot follow yourself.',
+    7008: 'Follow exists already.',
+    7009: 'No future recurring events found.',
+    7010: 'You cannot remove yourself as admin.',
+    7011: 'Too many recurring events.',
+    7012: 'Event is already recurring.',
+    7013: 'Venue with that name exists already.',
+    7014: 'User is already an admin.',
+    7015: 'Request already accepted.',
+    7016: 'Event is already recurring.',
+    7017: 'User is already an admin of that event.',
+    7018: 'Venue cannot be an admin.',
+    7019: 'Venue cannot have a host.',
+    7020: 'Venue cannot have a feature.',
+    7021: 'You cannot send invites to venues.',
+    7022: 'You cannot send invites to events.',
+    7023: 'Only an event can send invites.',
+    7024: 'Incorrect password.',
+    7025: 'Cannot checkin to venue.',
+    7026: 'Request exists already.',
+    7027: 'Event is not recurring.',
+    7028: 'Maybe is not a valid response.',
+    7029: 'Username taken.',
+    7030: 'You cannot change the datetime for all recurrances.',
+    7031: 'Report exists already.',
+    7032: 'The extend date cannot be earlier than the last recurrance.',
+    7033: 'You cannot create or update a resource because another resource already exists or conflicts with one you are submitting.',
+    7034: 'Verification code expiration.',
+    7035: 'Verification code failure.',
+    7036: 'Get resource error.An unknown error.',  //获取资源时未知错误
+    7037: 'The resource is not only.The system could not judge which one.',         //资源不唯一
+    7038: 'Can\'t find the resources.',         //资源不存在
+    7039: 'Delete resource error.An unknown error.',  //删除资源时未知错误
+    7040: 'Update resource error.An unknown error.',  //更新资源时未知错误
+    7041: 'Create resource error.An unknown error.',  //创建资源时未知错误
+    7042: 'The request is frequent.', //请求过于频繁
+    7043: 'The application does not mapping accountStore.', //应用程序没有关联映射账户的存储容器
+    7044: 'Failed to send email! May be email proxy server error!',
+&nbsp;
+    //9000~9999 其它类错误
+    9000: 'Program code bug',
+    9998: 'Bad params.',
+    9999: 'Unknown Error'
+};
+var missingReg = new RegExp('^Missing ');
+var missingParam2Code = {};
+for(var property in errorCodeTable){
+    if(missingReg.test(errorCodeTable[property])){
+        var strV = errorCodeTable[property].split( /[ .]/);
+        assert(strV.length&gt;=2);
+        assert(strV[0]==='Missing');
+&nbsp;
+        var text = strV[1];
+        for( var i=2; i&lt;strV.length; i++){
+            text += strV[i].substring(0,1).toUpperCase() + strV[i].substring(1);
+        }
+        missingParam2Code[text] = Number(property);
+    }
+}
+&nbsp;
+var formatReg = new RegExp('^Incorrect ');
+var formatParam2Code = {};
+for(var property in errorCodeTable){
+    if(formatReg.test(errorCodeTable[property])){
+        var strV = errorCodeTable[property].split( /[ .]/);
+        assert(strV.length&gt;=2);
+        assert(strV[0]==='Incorrect');
+&nbsp;
+        var text = strV[1];
+        for( var i=2; i&lt;strV.length; i++){
+            if(strV[i]==='format'){ break; }
+            text += strV[i].substring(0,1).toUpperCase() + strV[i].substring(1);
+        }
+        formatParam2Code[text] = Number(property);
+    }
+}
+&nbsp;
+var resourcesDoesNotExistReg = new RegExp('does not exist.$');
+var resourcesDoesNotExist2Code = {};
+for(var property in errorCodeTable){
+    if(resourcesDoesNotExistReg.test(errorCodeTable[property])){
+        var strTemp = errorCodeTable[property].split( /does not exist./);
+        var strV = strTemp[0].split(' ');
+        assert(strV.length&gt;=2);
+&nbsp;
+        var text = strV[0].toLowerCase();
+        for( var i=1; i&lt;strV.length; i++){
+            text += strV[i].substring(0,1).toUpperCase() + strV[i].substring(1);
+        }
+        resourcesDoesNotExist2Code[text] = Number(property);
+    }
+}
+&nbsp;
+&nbsp;
+exports.errorCode2Text = function( code ){
+    return errorCodeTable.hasOwnProperty(code) ? errorCodeTable[code] : <span class="branch-1 cbranch-no" title="branch not covered" >errorCodeTable[9999];</span>
+};
+exports.missingParam2Code = function( param ){
+    return missingParam2Code.hasOwnProperty(param)?missingParam2Code[param] : 9998;
+};
+exports.formatParam2Code = <span class="fstat-no" title="function not covered" >function( param ){</span>
+<span class="cstat-no" title="statement not covered" >    return formatParam2Code.hasOwnProperty(param)?formatParam2Code[param] : 3999;</span>
+};
+exports.resourcesDoesNotExist2Code = function( resources ){
+    return resourcesDoesNotExist2Code.hasOwnProperty(resources)?resourcesDoesNotExist2Code[resources] : <span class="branch-1 cbranch-no" title="branch not covered" >1599;</span>
+};
+var d = exports.resourcesDoesNotExist2Code('mobile');
+var di = 0;
+&nbsp;
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Thu Jul 14 2016 11:09:59 GMT+0800 (中国标准时间)
+</div>
+</div>
+<script src="../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../sorter.js"></script>
+</body>
+</html>

@@ -1,0 +1,3002 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for SIMCardComponent\controllers\groupMemberships.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../index.html">all files</a> / <a href="index.html">SIMCardComponent/controllers/</a> groupMemberships.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">40.41% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>238/589</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">28.41% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>77/271</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">45.35% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>39/86</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">40.41% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>238/589</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381
+382
+383
+384
+385
+386
+387
+388
+389
+390
+391
+392
+393
+394
+395
+396
+397
+398
+399
+400
+401
+402
+403
+404
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415
+416
+417
+418
+419
+420
+421
+422
+423
+424
+425
+426
+427
+428
+429
+430
+431
+432
+433
+434
+435
+436
+437
+438
+439
+440
+441
+442
+443
+444
+445
+446
+447
+448
+449
+450
+451
+452
+453
+454
+455
+456
+457
+458
+459
+460
+461
+462
+463
+464
+465
+466
+467
+468
+469
+470
+471
+472
+473
+474
+475
+476
+477
+478
+479
+480
+481
+482
+483
+484
+485
+486
+487
+488
+489
+490
+491
+492
+493
+494
+495
+496
+497
+498
+499
+500
+501
+502
+503
+504
+505
+506
+507
+508
+509
+510
+511
+512
+513
+514
+515
+516
+517
+518
+519
+520
+521
+522
+523
+524
+525
+526
+527
+528
+529
+530
+531
+532
+533
+534
+535
+536
+537
+538
+539
+540
+541
+542
+543
+544
+545
+546
+547
+548
+549
+550
+551
+552
+553
+554
+555
+556
+557
+558
+559
+560
+561
+562
+563
+564
+565
+566
+567
+568
+569
+570
+571
+572
+573
+574
+575
+576
+577
+578
+579
+580
+581
+582
+583
+584
+585
+586
+587
+588
+589
+590
+591
+592
+593
+594
+595
+596
+597
+598
+599
+600
+601
+602
+603
+604
+605
+606
+607
+608
+609
+610
+611
+612
+613
+614
+615
+616
+617
+618
+619
+620
+621
+622
+623
+624
+625
+626
+627
+628
+629
+630
+631
+632
+633
+634
+635
+636
+637
+638
+639
+640
+641
+642
+643
+644
+645
+646
+647
+648
+649
+650
+651
+652
+653
+654
+655
+656
+657
+658
+659
+660
+661
+662
+663
+664
+665
+666
+667
+668
+669
+670
+671
+672
+673
+674
+675
+676
+677
+678
+679
+680
+681
+682
+683
+684
+685
+686
+687
+688
+689
+690
+691
+692
+693
+694
+695
+696
+697
+698
+699
+700
+701
+702
+703
+704
+705
+706
+707
+708
+709
+710
+711
+712
+713
+714
+715
+716
+717
+718
+719
+720
+721
+722
+723
+724
+725
+726
+727
+728
+729
+730
+731
+732
+733
+734
+735
+736
+737
+738
+739
+740
+741
+742
+743
+744
+745
+746
+747
+748
+749
+750
+751
+752
+753
+754
+755
+756
+757
+758
+759
+760
+761
+762
+763
+764
+765
+766
+767
+768
+769
+770
+771
+772
+773
+774
+775
+776
+777
+778
+779
+780
+781
+782
+783
+784
+785
+786
+787
+788
+789
+790
+791
+792
+793
+794
+795
+796
+797
+798
+799
+800
+801
+802
+803
+804
+805
+806
+807
+808
+809
+810
+811
+812
+813
+814
+815
+816
+817
+818
+819
+820
+821
+822
+823
+824
+825
+826
+827
+828
+829
+830
+831
+832
+833
+834
+835
+836
+837
+838
+839
+840
+841
+842
+843
+844
+845
+846
+847
+848
+849
+850
+851
+852
+853
+854
+855
+856
+857
+858
+859
+860
+861
+862
+863
+864
+865
+866
+867
+868
+869
+870
+871
+872
+873
+874
+875
+876
+877
+878
+879
+880
+881
+882
+883
+884
+885
+886
+887
+888
+889
+890
+891
+892
+893
+894
+895
+896
+897
+898
+899
+900
+901
+902
+903
+904
+905
+906
+907
+908
+909
+910
+911
+912
+913
+914
+915
+916
+917
+918
+919
+920
+921
+922
+923
+924
+925
+926
+927
+928
+929
+930
+931
+932
+933
+934
+935
+936
+937
+938
+939
+940
+941
+942
+943
+944
+945
+946
+947
+948
+949
+950
+951
+952
+953
+954
+955
+956
+957
+958
+959
+960
+961
+962
+963
+964
+965
+966
+967
+968
+969
+970
+971
+972
+973
+974
+975
+976
+977
+978
+979
+980</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
+ * Created by Administrator on 2016/5/26.
+ */
+"use strict";
+var common = require('./common');
+var log = require("../common/log").getLogger();
+var contentType = require('./common').retContentType;
+var utils= require('../common/utils');
+var returnResources = require('./returnResources');
+var groupMembershipProxy = require('../proxy/groupMembershipOperator');
+var tenantProxy=require('../proxy/tenantOperator');
+var errorCodeTable = require('../common/errorCodeTable');
+var simCardProxy = require('../proxy/simCardOperator');
+var groupsProxy = require('../proxy/groupOperator');
+var MessageProducer = require('./messageProducerCentre').MessageProducer;
+var merchandiseComponentProducer = new MessageProducer();
+var Message = require('../common/message').Message;
+var MessageId = require('../common/message').MessageId;
+var config = require('../config/config');
+var eventProxy = require('eventproxy');
+&nbsp;
+&nbsp;
+var mainParam = function(info) {
+    var judgeResult;
+    judgeResult = common.mandatoryParams(info, ['simCard', 'group']);
+    return judgeResult;
+}
+&nbsp;
+&nbsp;
+function isTenantExist(tenantUUID){
+    var queryStr = 'uuid=\'' + tenantUUID + '\'';
+    return new Promise(function (resolve) {
+        tenantProxy.queryBy(null, queryStr)
+            .then(function(results){
+                var judge = common.isOnly(null, results.length);
+                <span class="missing-if-branch" title="else path not taken" >E</span>if(judge.is){
+                    resolve(results[0]);
+                    return;
+                }
+<span class="cstat-no" title="statement not covered" >                if(judge.flag == 1){</span>
+<span class="cstat-no" title="statement not covered" >                    judge.error.description = 'Could not find the resources you want to query tenant.the query string: ' + queryStr;</span>
+                }else <span class="cstat-no" title="statement not covered" >if(judge.flag == 2){</span>
+<span class="cstat-no" title="statement not covered" >                    judge.error.description = 'Find much resource when query tenant. the query string: ' + queryStr;</span>
+                }
+<span class="cstat-no" title="statement not covered" >                resolve( judge);</span>
+            });
+    });
+}
+&nbsp;
+function isExist(simCard, group, tenantUUID, uuid){
+    var queryStr = 'tenantUUID=\'' + tenantUUID + '\'';
+    if(simCard &amp;&amp; group){
+        var simCardUUID, groupUUID;
+        <span class="missing-if-branch" title="else path not taken" >E</span>if(simCard &amp;&amp; simCard.href){
+            <span class="missing-if-branch" title="else path not taken" >E</span>if(simCard.href.indexOf('simCards/')&gt;-1){
+                simCardUUID=utils.getUUIDInHref(simCard.href, 'simCards/');
+            }
+        }
+        <span class="missing-if-branch" title="else path not taken" >E</span>if(group &amp;&amp; group.href){
+            <span class="missing-if-branch" title="else path not taken" >E</span>if(group.href.indexOf('groups/')&gt;-1){
+                groupUUID=utils.getUUIDInHref(group.href, 'groups/');
+            }
+        }
+        queryStr += ' and simCardUUID=\''+ simCardUUID + '\' and groupUUID=\''+ groupUUID + '\'';
+    }else{
+        queryStr += ' and uuid=\''+ uuid + '\'';
+    }
+&nbsp;
+    return new Promise(function (resolve) {
+        groupMembershipProxy.queryBy(null, queryStr)
+            .then(function(results){
+                var judge = common.isOnly(null, results.length);
+                if(judge.is){
+                    resolve(results[0]);
+                    return;
+                }
+                <span class="missing-if-branch" title="else path not taken" >E</span>if(judge.flag == 1){
+                    judge.error.description = 'Could not find the resources you want to query groupMembership.the query string: ' + queryStr;
+                }else <span class="cstat-no" title="statement not covered" >if(judge.flag == 2){</span>
+<span class="cstat-no" title="statement not covered" >                    judge.error.description = 'Find much resource when query groupMembership. the query string: ' + queryStr;</span>
+                }
+                resolve( judge);
+            });
+    });
+}
+function isValidQueryCondition(queryCondition) {
+    for(var item in queryCondition){
+        switch(item){
+<span class="branch-0 cbranch-no" title="branch not covered" >            case 'uuid' : <span class="branch-1 cbranch-no" title="branch not covered" ></span>case 'deviceURL' :<span class="branch-2 cbranch-no" title="branch not covered" >c</span>ase 'groupURL':<span class="branch-3 cbranch-no" title="branch not covered" >c</span>ase 'type':</span>
+<span class="branch-4 cbranch-no" title="branch not covered" >            case 'createAt' : </span> <span class="branch-5 cbranch-no" title="branch not covered" >case 'modifiedAt' :</span>
+            case 'expand':case 'offset': case 'limit':
+            case 'deviceBy':
+                break;
+<span class="branch-10 cbranch-no" title="branch not covered" >            default:</span>
+<span class="cstat-no" title="statement not covered" >                return false;</span>
+        }
+    }
+    return true;
+}
+&nbsp;
+&nbsp;
+/**
+ * @api {post} /:version/tenants/:tenantUUID/groupMemberships CreateGroupMembership
+ * @apiName CreateGroupMembership
+ * @apiVersion 1.0.0
+ * @apiGroup GroupMembership
+ * @apiDescription  创建一个SIM卡与组的关系
+ * @apiParam (input) {url} simCard SIM卡，见[SIMCard](#api-SIMCard)资源
+ * @apiParam (input) {url} group 组，见[Group](#api-Group)资源
+ *
+ * @apiParam (output) {url} simCard SIM卡，见[SIMCard](#api-SIMCard)资源
+ * @apiParam (output) {url} group 组，见[Group](#api-Group)资源
+ * @apiParam (output) {string} createAt 创建时间，时间格式为（YYYY-MM-DD hh:MM:SS）
+ * @apiParam (output) {string} modifiedAt 最后更新时间，默认下创建时间一样，时间格式为（YYYY-MM-DD hh:MM:SS）
+ * @apiParamExample  Example Request
+ * POST:  https://127.0.0.1:3000/api/v1/tenants/P0F5iYzwSRzjiIfLs1Jfo9/groupMemberships
+ * Content-Type: application/json;charset=UTF-8
+ * {
+ *   'simCard' : {
+ *      'href':'https://127.0.0.1:3000/api/v1/tenants/P0F5iYzwSRzjiIfLs1Jfo9/directories/57YZCqrNgrzcIGYs1PfP4F/simCards/g2r22qrNgrzcIGYs1Pfr4g'
+ *   },
+ *   'group':{
+ *      'href':'https://127.0.0.1:3000/api/v1/tenants/P0F5iYzwSRzjiIfLs1Jfo9/groups/0000CqrNgrzcIGYs1PfP4F'
+ *   }
+ * }
+ *
+ * @apiSuccessExample Example Response
+ * HTTP/1.1 201 Created
+ * Location: https://127.0.0.1:3000/api/v1/tenants/P0F5iYzwSRzjiIfLs1Jfo9/groupMemberships/57YZCqrNgrzcIGYs1PfP4F
+ * Content-Type: application/json;charset=UTF-8;
+ * {
+ *   'href' : 'https://127.0.0.1:3000/api/v1/tenants/P0F5iYzwSRzjiIfLs1Jfo9/groupMemberships/57YZCqrNgrzcIGYs1PfP4F',
+ *   'simCard' : {
+ *      'href':'https://127.0.0.1:3000/api/v1/tenants/P0F5iYzwSRzjiIfLs1Jfo9/directories/57YZCqrNgrzcIGYs1PfP4F/simCards/g2r22qrNgrzcIGYs1Pfr4g'
+ *   },
+ *   'group':{
+ *      'href':'https://127.0.0.1:3000/api/v1/tenants/P0F5iYzwSRzjiIfLs1Jfo9/groups/0000CqrNgrzcIGYs1PfP4F'
+ *   },
+ *   "createAt" : "2016-01-10 12:30:00",
+ *   "modifiedAt" : "2016-01-10 12:30:00"
+ * }
+ */
+var createGroupMembershipV1 = function(req, res) {
+    var info = req.body;
+    <span class="missing-if-branch" title="if path not taken" >I</span>if ( !utils.checkUUID(req.params.tenantUUID)) {
+<span class="cstat-no" title="statement not covered" >        var error={</span>
+            status:400,
+            description:'输入参数有误'
+        }
+<span class="cstat-no" title="statement not covered" >        return common.errorReturn(res, error.status, error);</span>
+    }
+    var tenantUUID=req.params.tenantUUID;
+    info.tenantUUID=tenantUUID;
+    var directoryUUID;
+    <span class="missing-if-branch" title="else path not taken" >E</span>if(info.simCard &amp;&amp; info.simCard.href){
+        <span class="missing-if-branch" title="else path not taken" >E</span>if(info.simCard.href.indexOf('simCards/')&gt;-1){
+            directoryUUID = utils.getUUIDInHref(info.simCard.href, 'directories/', '/simCards');
+        }
+    }
+    var judgeResult = mainParam(info);
+    var isTenant = isTenantExist(tenantUUID);
+    var getExist=isExist(info.simCard, info.group, tenantUUID, null);
+&nbsp;
+    var topic='';
+    Promise.all([judgeResult, isTenant, getExist]).then(function(result){
+        <span class="missing-if-branch" title="if path not taken" >I</span>if(result[0].flag==4){
+<span class="cstat-no" title="statement not covered" >            throw result[0];</span>
+        }
+        <span class="missing-if-branch" title="if path not taken" >I</span>if(result[1].is==false){
+<span class="cstat-no" title="statement not covered" >            throw result[1];</span>
+        }
+        topic=result[1].topic;
+        <span class="missing-if-branch" title="else path not taken" >E</span>if(result[2].flag!=0){
+            <span class="missing-if-branch" title="else path not taken" >E</span>if(result[2].error &amp;&amp; result[2].error.status == 404){
+                return Promise.resolve(groupMembershipProxy.createGroupMembership(info));
+            }
+<span class="cstat-no" title="statement not covered" >            var retData = {};</span>
+<span class="cstat-no" title="statement not covered" >            var error = new Error();</span>
+<span class="cstat-no" title="statement not covered" >            error.name = 'InternalError';</span>
+<span class="cstat-no" title="statement not covered" >            error.status = 409;</span>
+<span class="cstat-no" title="statement not covered" >            error.code = 7037;</span>
+<span class="cstat-no" title="statement not covered" >            error.message = errorCodeTable.errorCode2Text( error.code );</span>
+<span class="cstat-no" title="statement not covered" >            error.description = 'The resource is exist! the resource name is: ' + info.name;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            retData.error = error;</span>
+<span class="cstat-no" title="statement not covered" >            retData.is = false;</span>
+<span class="cstat-no" title="statement not covered" >            retData.flag = 2;</span>
+<span class="cstat-no" title="statement not covered" >            throw retData;</span>
+        }
+    }).then(function(result){
+        result.directoryUUID=directoryUUID;
+        var bodyDataJson = returnResources.generateGroupMembershipRetInfo(tenantUUID, result);
+        <span class="missing-if-branch" title="if path not taken" >I</span>if (config.is_sendMessage) {
+<span class="cstat-no" title="statement not covered" >            var message = new Message(MessageId.Create_Service_Success, bodyDataJson);</span>
+<span class="cstat-no" title="statement not covered" >            merchandiseComponentProducer.sendMessage(topic, message, <span class="fstat-no" title="function not covered" >function(error, data){</span></span>
+<span class="cstat-no" title="statement not covered" >                console.log(error);</span>
+            });
+        }
+        res.writeHead(201, {'Content-Type': common.retContentType, 'Location': bodyDataJson.href});
+        res.write(JSON.stringify(bodyDataJson));
+        res.end();
+        return;
+    }).catch(<span class="fstat-no" title="function not covered" >function(err) {</span>
+<span class="cstat-no" title="statement not covered" >        common.errReturnCommon(err, res);</span>
+<span class="cstat-no" title="statement not covered" >        return;</span>
+    });
+}
+&nbsp;
+exports.createGroupMembership = function(req, res, next) {
+    var version = req.params.version;
+    <span class="missing-if-branch" title="else path not taken" >E</span>if(version == common.VERSION100){
+        createGroupMembershipV1(req, res);
+        <span class="missing-if-branch" title="if path not taken" >I</span>if(config.record == true){
+<span class="cstat-no" title="statement not covered" >            next();</span>
+        }
+    }
+};
+&nbsp;
+&nbsp;
+/**
+ * @api {get} /:version/tenants/:tenantUUID/groupMemberships/:groupMembershipUUID RetrieveGroupMembership
+ * @apiName RetrieveGroupMembership
+ * @apiVersion 1.0.0
+ * @apiGroup GroupMembership
+ * @apiDescription  获取指定SIM卡与组的关系信息
+ * @apiParam {string} [expand] ?后面可以接查询字段expand,expand表示获取时同时返回对应资源的信息。expand的值可以是group,simCard或他们的组合，中间用','号隔开
+ *
+ * @apiParam (output) {url}  simCard SIM卡，见[SIMCard](#api-SIMCard)资源
+ * @apiParam (output) {url} group 组，见[Group](#api-Group)资源
+ * @apiParam (output) {string} createAt 创建时间，时间格式为（YYYY-MM-DD hh:MM:SS）
+ * @apiParam (output) {string} modifiedAt 最后更新时间，默认下创建时间一样，时间格式为（YYYY-MM-DD hh:MM:SS）
+ *
+ * @apiParamExample Example Request
+ * GET https://127.0.0.1:3000/api/v1/tenants/P0F5iYzwSRzjiIfLs1Jfo9/groupMemberships/57YZCqrNgrzcIGYs1PfP4F
+ * @apiSuccessExample Example Response
+ * HTTP/1.1 200 OK
+ * Content-Type: application/json;charset=UTF-8;
+ *
+ * {
+ *   'href' : 'https://127.0.0.1:3000/api/v1/tenants/P0F5iYzwSRzjiIfLs1Jfo9/groupMemberships/57YZCqrNgrzcIGYs1PfP4F',
+ *   'simCard' : {
+ *      'href':'https://127.0.0.1:3000/api/v1/tenants/P0F5iYzwSRzjiIfLs1Jfo9/directories/57YZCqrNgrzcIGYs1PfP4F/simCards/g2r22qrNgrzcIGYs1Pfr4g'
+ *   },
+ *   'group':{
+ *      'href':'https://127.0.0.1:3000/api/v1/tenants/P0F5iYzwSRzjiIfLs1Jfo9/groups/0000CqrNgrzcIGYs1PfP4F'
+ *   },
+ *   "createAt" : "2016-01-10 12:30:00",
+ *   "modifiedAt" : "2016-01-10 12:30:00"
+ * }
+ */
+function isExpandStrVail(expandStr){
+    var expandArray = expandStr.split(';');
+    for(var i = 0; i &lt; expandArray.length; ++i) {
+        switch (expandArray[i]) {
+            case 'group':
+            case 'simCard':
+                break;
+<span class="branch-2 cbranch-no" title="branch not covered" >            default:</span>
+<span class="cstat-no" title="statement not covered" >                return false;</span>
+        }
+    }
+    return true;
+}
+function getGroup(tenantUUID, groupUUID ){
+    return new Promise(function (resolve) {
+        groupsProxy.retrieveGroup(groupUUID)
+            .then(function(results){
+                var judge = common.isOnly(null, results);
+                <span class="missing-if-branch" title="if path not taken" >I</span>if(judge.is == false){
+<span class="cstat-no" title="statement not covered" >                    throw (judge);</span>
+                }
+                var bodyInfo = returnResources.generateGroupRetInfo(tenantUUID, results[0]);
+                resolve(bodyInfo);
+            })
+    })
+}
+var getSimCardForExpand = (tenantUUID, simCardUUID) =&gt; {
+    return new Promise(function (resolve) {
+        simCardProxy.getSIMCard(simCardUUID)
+            .then(function(results){
+                var judge = common.isOnly(null, results);
+                <span class="missing-if-branch" title="if path not taken" >I</span>if(judge.is == false){
+<span class="cstat-no" title="statement not covered" >                    throw (judge);</span>
+                }
+                var bodyInfo = returnResources.generateSIMCardRetInfo(tenantUUID, results[0]);
+                resolve(bodyInfo);
+            })
+    })
+}
+&nbsp;
+function getExpandInfo(expandStr, data, retInfo, isList, itemIndex, tenantUUID){
+&nbsp;
+    return new Promise(function(resolve){
+        var expandArray = expandStr.split(';');
+        var index = 0;
+&nbsp;
+        for(var i = 0; i &lt; expandArray.length; ++i){
+            switch(expandArray[i]){
+                case 'group':
+                    getGroup(tenantUUID, data.groupUUID).then(function(result){
+                        <span class="missing-if-branch" title="if path not taken" >I</span>if(result.is == false){
+<span class="cstat-no" title="statement not covered" >                            throw result;</span>
+                        }else{
+                            if(!isList){
+                                retInfo.group = result;
+                            }else{
+                                retInfo.items[itemIndex].group = result;
+                            }
+                            index += 1;
+                            <span class="missing-if-branch" title="else path not taken" >E</span>if(index == expandArray.length)  {
+                                resolve(retInfo);
+                            }else{
+<span class="cstat-no" title="statement not covered" >                                return retInfo;</span>
+                            }
+                        }
+                    });
+                    break;
+                case 'simCard':
+                    getSimCardForExpand(tenantUUID, data.simCardUUID).then(function(result){
+                        <span class="missing-if-branch" title="if path not taken" >I</span>if(result.is == false){
+<span class="cstat-no" title="statement not covered" >                            throw result;</span>
+                        }else{
+                            if(!isList){
+                                retInfo.simCard = result;
+                            }else{
+                                retInfo.items[itemIndex].simCard = result;
+                            }
+                            index += 1;
+                            if(index == expandArray.length)  {
+                                resolve(retInfo);
+                            }else{
+                                return retInfo;
+                            }
+                        }
+                    });
+                    break;
+<span class="branch-2 cbranch-no" title="branch not covered" >                default:</span>
+<span class="cstat-no" title="statement not covered" >                    var err = new Error('the params of expand is error!');</span>
+<span class="cstat-no" title="statement not covered" >                    err.status = 400;</span>
+<span class="cstat-no" title="statement not covered" >                    throw err;</span>
+            }
+        }
+    });
+}
+&nbsp;
+var getSimCard = (simCardUUID) =&gt; {
+    return Promise.resolve(simCardProxy.getSIMCard(simCardUUID));
+}
+&nbsp;
+var retrieveGroupMembershipV1=function(req, res){
+    <span class="missing-if-branch" title="if path not taken" >I</span>if ( !utils.checkUUID(req.params.tenantUUID) &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >!utils.checkUUID(req.params.groupMembershipUUID))</span> {
+<span class="cstat-no" title="statement not covered" >        var error={</span>
+            status:400,
+            description:'输入参数有误'
+        }
+<span class="cstat-no" title="statement not covered" >        return common.errorReturn(res, error.status, error);</span>
+    }
+    var tenantUUID=req.params.tenantUUID;
+&nbsp;
+    var groupMembershipUUID=req.params.groupMembershipUUID;
+    var expandStr = req.query.expand;
+    var judgeParams = common.isValidQueryParams(req, null, isExpandStrVail);
+    var retOrganization=Promise.resolve(groupMembershipProxy.retrieveGroupMembership(tenantUUID, groupMembershipUUID));
+    Promise.all([judgeParams, retOrganization]).then(function(results){
+        <span class="missing-if-branch" title="if path not taken" >I</span>if(results[0].is==false){
+<span class="cstat-no" title="statement not covered" >            throw  results[0];</span>
+        }
+        var judge = common.isOnly(null, results[1].length);
+        <span class="missing-if-branch" title="else path not taken" >E</span>if(judge.is){
+           return   getSimCard(results[1][0].simCardUUID).then((result) =&gt;{
+                 if(result.length == 0){
+                     return result;
+                 }
+                results[1][0].directoryUUID = result[0].directoryUUID;
+                  var bodyInfo = returnResources.generateGroupMembershipRetInfo(tenantUUID, results[1][0]);
+                  <span class="missing-if-branch" title="if path not taken" >I</span>if(!results[0].isExpand){
+<span class="cstat-no" title="statement not covered" >                      return bodyInfo;</span>
+                  }
+                  return new Promise(function(resolve){
+                      getExpandInfo(expandStr, results[1][0], bodyInfo, false, 0, tenantUUID)
+                          .then(function(data){
+                              return resolve(data);
+                          });
+                  })
+            })
+        }
+<span class="cstat-no" title="statement not covered" >        var error = judge.error;</span>
+<span class="cstat-no" title="statement not covered" >        if(judge.flag == 1){</span>
+<span class="cstat-no" title="statement not covered" >            error.description = 'Could not find the resources you want to retrieve groupMembership.the uuid: ' + groupMembershipUUID;</span>
+        }else <span class="cstat-no" title="statement not covered" >if(judge.flag == 2){</span>
+<span class="cstat-no" title="statement not covered" >            error.description = 'Find much resource when retrieve groupMembership. the uuid: ' + groupMembershipUUID;</span>
+        }
+<span class="cstat-no" title="statement not covered" >        throw judge;</span>
+    }).then(function(bodyInfo){
+        res.writeHead(200, {'Content-Type': contentType});
+        res.write(JSON.stringify(bodyInfo));
+        res.end();
+    }).catch(<span class="fstat-no" title="function not covered" >function(err) {</span>
+<span class="cstat-no" title="statement not covered" >        common.errReturnCommon(err, res);</span>
+<span class="cstat-no" title="statement not covered" >        return;</span>
+    });
+}
+exports.retrieveGroupMembership=function(req, res, next){
+    var version = req.params.version;
+    <span class="missing-if-branch" title="else path not taken" >E</span>if(version == common.VERSION100){
+        retrieveGroupMembershipV1(req, res);
+        <span class="missing-if-branch" title="if path not taken" >I</span>if(config.record == true){
+<span class="cstat-no" title="statement not covered" >            next();</span>
+        }
+    }
+}
+&nbsp;
+/**
+ * @api {delete} /:version/tenants/:tenantUUID/groupMemberships/:groupMembershipUUID DeleteGroupMembership
+ * @apiName DeleteGroupMembership
+ * @apiVersion 0.0.1
+ * @apiGroup GroupMembership
+ * @apiDescription  删除指定SIM卡与组的关系
+ * @apiParamExample Example Request
+ * Delete https://127.0.0.1:3000/api/v1/tenants/P0F5iYzwSRzjiIfLs1Jfo9/groupMemberships/57YZCqrNgrzcIGYs1PfP4F
+ *
+ * @apiSuccessExample Example Response
+ * HTTP/1.1 204 No Content
+ */
+&nbsp;
+var deleteGroupMembershipV1=function(req, res) {
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (!utils.checkUUID(req.params.tenantUUID) &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >!utils.checkUUID(req.params.groupMembershipUUID))</span> {
+<span class="cstat-no" title="statement not covered" >        var error={</span>
+            status:400,
+            description:'输入参数有误'
+        }
+<span class="cstat-no" title="statement not covered" >        return common.errorReturn(res, error.status, error);</span>
+    }
+    var tenantUUID = req.params.tenantUUID;
+    var groupMembershipUUID = req.params.groupMembershipUUID;
+    var isMembership = isExist(null, null, tenantUUID, groupMembershipUUID);
+    var delGroupMembership = Promise.resolve(groupMembershipProxy.deleteGroupMembership(groupMembershipUUID));
+    var ep = new eventProxy();
+    ep.on('send_Message', function(){
+        Promise.resolve(isTenantExist(tenantUUID)).then(function(result){
+            <span class="missing-if-branch" title="if path not taken" >I</span>if (config.is_sendMessage) {
+<span class="cstat-no" title="statement not covered" >                var message = new Message(MessageId.Delete_Service_Success, 204);</span>
+<span class="cstat-no" title="statement not covered" >                merchandiseComponentProducer.sendMessage(result.topic, message, <span class="fstat-no" title="function not covered" >function(error, data){</span></span>
+<span class="cstat-no" title="statement not covered" >                    console.log(error);</span>
+                });
+            }
+        });
+    });
+    Promise.all([isMembership, delGroupMembership]).then(function (result) {
+        <span class="missing-if-branch" title="if path not taken" >I</span>if(result[0].is==false){
+<span class="cstat-no" title="statement not covered" >            throw result[0];</span>
+        }
+        var judge = common.isOnly(null, result[1]);
+        <span class="missing-if-branch" title="else path not taken" >E</span>if (judge.is) {
+            ep.emit('send_Message');
+            res.writeHead(204, {'Content-Type': contentType});
+            res.end();
+            return;
+        }
+<span class="cstat-no" title="statement not covered" >        var error = judge.error;</span>
+<span class="cstat-no" title="statement not covered" >        if (judge.flag == 1) {</span>
+<span class="cstat-no" title="statement not covered" >            error.description = 'Could not find the resources you want to retrieve groupMembership.the uuid: ' + tenantUUID;</span>
+        }else <span class="cstat-no" title="statement not covered" >if (judge.flag == 2) {</span>
+<span class="cstat-no" title="statement not covered" >            error.description = 'Find much resource when retrieve groupMembership. the uuid: ' + tenantUUID;</span>
+        }
+<span class="cstat-no" title="statement not covered" >        throw judge;</span>
+&nbsp;
+    }).catch(<span class="fstat-no" title="function not covered" >function (err) {</span>
+<span class="cstat-no" title="statement not covered" >        common.errReturnCommon(err, res);</span>
+<span class="cstat-no" title="statement not covered" >        return;</span>
+    });
+}
+&nbsp;
+exports.deleteGroupMembership=function(req, res, next){
+    var version = req.params.version;
+    <span class="missing-if-branch" title="else path not taken" >E</span>if(version == common.VERSION100){
+        deleteGroupMembershipV1(req, res);
+        <span class="missing-if-branch" title="if path not taken" >I</span>if(config.record == true){
+<span class="cstat-no" title="statement not covered" >            next();</span>
+        }
+    }
+}
+&nbsp;
+var listGroupMembershipsV1 = function(req, res) {
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (!utils.checkUUID(req.params.tenantUUID)) {
+<span class="cstat-no" title="statement not covered" >        var error={</span>
+            status:400,
+            description:'输入参数有误'
+        }
+<span class="cstat-no" title="statement not covered" >        return common.errorReturn(res, error.status, error);</span>
+    }
+    var tenantUUID = req.params.tenantUUID;
+    var queryConditions = req.query;
+    var offset = common.ifNotReturnNum(Number(req.query.offset), 0);
+    var limit = common.ifNotReturnNum(Number(req.query.limit), 25);
+    var expandStr = req.query.expand;
+&nbsp;
+    var judgeQuery = common.isValidQueryParams(req, isValidQueryCondition, isExpandStrVail);
+    var isTenant = isTenantExist(tenantUUID);
+    var listSuccess = Promise.resolve(groupMembershipProxy.queryGroupMemberships(tenantUUID, queryConditions, offset, limit));
+    var countSuccess = Promise.resolve(groupMembershipProxy.getCount(tenantUUID, queryConditions));
+&nbsp;
+    Promise.all([judgeQuery, isTenant, listSuccess, countSuccess]).then(function (results) {
+        <span class="missing-if-branch" title="if path not taken" >I</span>if (results[0].is == false) {
+<span class="cstat-no" title="statement not covered" >            throw results[0];</span>
+        }
+        <span class="missing-if-branch" title="if path not taken" >I</span>if (results[1].is == false) {
+<span class="cstat-no" title="statement not covered" >            throw results[1];</span>
+        }
+        <span class="missing-if-branch" title="if path not taken" >I</span>if (results[2].length == 0) {
+<span class="cstat-no" title="statement not covered" >            results[2] = new Array();</span>
+        }
+        var simCardResult = new Array;
+        for(let i in results[2]) {
+            simCardResult[i] = getSimCard(results[2][i].simCardUUID).then((result) =&gt; {
+                <span class="missing-if-branch" title="if path not taken" >I</span>if (result.length == 0) {
+<span class="cstat-no" title="statement not covered" >                    throw result;</span>
+                }
+                results[2][i].directoryUUID = result[0].directoryUUID;
+                return results[2][i];
+            })
+        }
+      return  Promise.all(simCardResult).then((simResults) =&gt; {
+            var bodyInfo = returnResources.generateListGroupMembershipRetInfo(tenantUUID, queryConditions, offset, results[3], simResults);
+            if (!results[0].isExpand || simResults.length == 0) {
+                res.writeHead(200, {'Content-Type': contentType});
+                res.write(JSON.stringify(bodyInfo));
+                res.end();
+                return;
+            }
+            var count = 0;
+            new Promise(function(resolve){
+                for (var i = 0; i &lt; results[2].length; ++i) {
+                    getExpandInfo(expandStr, results[2][i], bodyInfo, true, i, tenantUUID).then(function (datas) {
+                        ++count;
+                        <span class="missing-if-branch" title="else path not taken" >E</span>if (count == results[2].length) {
+                            return resolve(datas);
+                        }
+                    })
+                }
+            }).then(function (bodyInfo) {
+                res.writeHead(200, {'Content-Type': contentType});
+                res.write(JSON.stringify(bodyInfo));
+                res.end();
+                return;
+            });
+        });
+    }).catch(<span class="fstat-no" title="function not covered" >function (err) {</span>
+<span class="cstat-no" title="statement not covered" >        common.errReturnCommon(err, res);</span>
+<span class="cstat-no" title="statement not covered" >        return;</span>
+    });
+}
+exports.listGroupMemberships=function(req, res, next){
+    var version = req.params.version;
+    <span class="missing-if-branch" title="else path not taken" >E</span>if(version == common.VERSION100){
+        listGroupMembershipsV1(req, res);
+        <span class="missing-if-branch" title="if path not taken" >I</span>if(config.record == true){
+<span class="cstat-no" title="statement not covered" >            next();</span>
+        }
+    }
+}
+&nbsp;
+<span class="fstat-no" title="function not covered" >function isGroupExist(tenantUUID, groupUUID){</span>
+<span class="cstat-no" title="statement not covered" >    var queryStr = 'tenantUUID=\'' + tenantUUID + '\' and uuid=\'' + groupUUID + '\'';</span>
+<span class="cstat-no" title="statement not covered" >    return new Promise(<span class="fstat-no" title="function not covered" >function (resolve) {</span></span>
+<span class="cstat-no" title="statement not covered" >        groupsProxy.queryBy(null, queryStr)</span>
+            .then(<span class="fstat-no" title="function not covered" >function(results){</span>
+<span class="cstat-no" title="statement not covered" >                var judge = common.isOnly(null, results.length);</span>
+<span class="cstat-no" title="statement not covered" >                if(judge.is){</span>
+<span class="cstat-no" title="statement not covered" >                    resolve(results[0]);</span>
+<span class="cstat-no" title="statement not covered" >                    return;</span>
+                }
+<span class="cstat-no" title="statement not covered" >                if(judge.flag == 1){</span>
+<span class="cstat-no" title="statement not covered" >                    judge.error.description = 'Could not find the resources you want to query group.the query string: ' + queryStr;</span>
+                }else <span class="cstat-no" title="statement not covered" >if(judge.flag == 2){</span>
+<span class="cstat-no" title="statement not covered" >                    judge.error.description = 'Find much resource when query group. the query string: ' + queryStr;</span>
+                }
+<span class="cstat-no" title="statement not covered" >                resolve( judge);</span>
+            });
+    });
+}
+&nbsp;
+var listGroupMembershipsByGroupV1 = <span class="fstat-no" title="function not covered" >function(req, res){</span>
+<span class="cstat-no" title="statement not covered" >    if ( !utils.checkUUID(req.params.tenantUUID) &amp;&amp; !utils.checkUUID(req.params.groupUUID) ) {</span>
+<span class="cstat-no" title="statement not covered" >        var error={</span>
+            status:400,
+            description:'输入参数有误'
+        }
+<span class="cstat-no" title="statement not covered" >        return common.errorReturn(res, error.status, error);</span>
+    }
+<span class="cstat-no" title="statement not covered" >    var tenantUUID=req.params.tenantUUID;</span>
+<span class="cstat-no" title="statement not covered" >    var groupUUID=req.params.groupUUID;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    var queryConditions = req.query;</span>
+<span class="cstat-no" title="statement not covered" >    var expandStr  = req.query.expand;</span>
+<span class="cstat-no" title="statement not covered" >    var offset = common.ifNotReturnNum(Number(req.query.offset), 0);</span>
+<span class="cstat-no" title="statement not covered" >    var limit = common.ifNotReturnNum(Number(req.query.limit), 25);</span>
+<span class="cstat-no" title="statement not covered" >    var judgeQuery=common.isValidQueryParams(req, isValidQueryCondition, isExpandStrVail);</span>
+<span class="cstat-no" title="statement not covered" >    var isGroup = isGroupExist(tenantUUID, groupUUID);</span>
+<span class="cstat-no" title="statement not covered" >    var listSuccess=Promise.resolve(groupMembershipProxy.queryGroupMemberships(tenantUUID, queryConditions, offset, limit, groupUUID));</span>
+<span class="cstat-no" title="statement not covered" >    var countSuccess=Promise.resolve(groupMembershipProxy.getCount(tenantUUID, queryConditions, groupUUID));</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    Promise.all([judgeQuery, isGroup, listSuccess, countSuccess]).then(<span class="fstat-no" title="function not covered" >function(results){</span></span>
+<span class="cstat-no" title="statement not covered" >        if(results[0].is ==  false){</span>
+<span class="cstat-no" title="statement not covered" >            throw results[0];</span>
+        }
+<span class="cstat-no" title="statement not covered" >        if(results[1].is ==  false){</span>
+<span class="cstat-no" title="statement not covered" >            throw results[1];</span>
+        }
+<span class="cstat-no" title="statement not covered" >        if(results[2].length==0){</span>
+<span class="cstat-no" title="statement not covered" >            results[2]=new Array();</span>
+        }
+<span class="cstat-no" title="statement not covered" >        var simCardResult = new Array;</span>
+<span class="cstat-no" title="statement not covered" >        for(let i in results[2]) {</span>
+<span class="cstat-no" title="statement not covered" >            simCardResult[i] = getSimCard(results[2][i].simCardUUID).then((result) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >                if (result.length == 0) {</span>
+<span class="cstat-no" title="statement not covered" >                    throw result;</span>
+                }
+<span class="cstat-no" title="statement not covered" >                results[2][i].directoryUUID = result[0].directoryUUID;</span>
+<span class="cstat-no" title="statement not covered" >                return results[2][i];</span>
+            })
+        }
+<span class="cstat-no" title="statement not covered" >        return  Promise.all(simCardResult).then((simResults) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >            var bodyInfo = returnResources.generateListGroupMembershipRetInfo(tenantUUID, queryConditions, offset, results[3], simResults);</span>
+<span class="cstat-no" title="statement not covered" >            if (!results[0].isExpand || simResults.length == 0) {</span>
+<span class="cstat-no" title="statement not covered" >                res.writeHead(200, {'Content-Type': contentType});</span>
+<span class="cstat-no" title="statement not covered" >                res.write(JSON.stringify(bodyInfo));</span>
+<span class="cstat-no" title="statement not covered" >                res.end();</span>
+<span class="cstat-no" title="statement not covered" >                return;</span>
+            }
+<span class="cstat-no" title="statement not covered" >            var count = 0;</span>
+<span class="cstat-no" title="statement not covered" >            new Promise(<span class="fstat-no" title="function not covered" >function(resolve){</span></span>
+<span class="cstat-no" title="statement not covered" >                for (var i = 0; i &lt; results[2].length; ++i) {</span>
+<span class="cstat-no" title="statement not covered" >                    getExpandInfo(expandStr, results[2][i], bodyInfo, true, i, tenantUUID).then(<span class="fstat-no" title="function not covered" >function (datas) {</span></span>
+<span class="cstat-no" title="statement not covered" >                        ++count;</span>
+<span class="cstat-no" title="statement not covered" >                        if (count == results[2].length) {</span>
+<span class="cstat-no" title="statement not covered" >                            return resolve(datas);</span>
+                        }
+                    })
+                }
+            }).then(<span class="fstat-no" title="function not covered" >function (bodyInfo) {</span>
+<span class="cstat-no" title="statement not covered" >                res.writeHead(200, {'Content-Type': contentType});</span>
+<span class="cstat-no" title="statement not covered" >                res.write(JSON.stringify(bodyInfo));</span>
+<span class="cstat-no" title="statement not covered" >                res.end();</span>
+<span class="cstat-no" title="statement not covered" >                return;</span>
+            });
+        });
+    }).catch(<span class="fstat-no" title="function not covered" >function(err) {</span>
+<span class="cstat-no" title="statement not covered" >        common.errReturnCommon(err, res);</span>
+<span class="cstat-no" title="statement not covered" >        return;</span>
+    });
+};
+exports.listGroupMembershipsByGroup=<span class="fstat-no" title="function not covered" >function(req, res, next){</span>
+<span class="cstat-no" title="statement not covered" >    var version = req.params.version;</span>
+<span class="cstat-no" title="statement not covered" >    if(version == common.VERSION100){</span>
+<span class="cstat-no" title="statement not covered" >        listGroupMembershipsByGroupV1(req, res);</span>
+<span class="cstat-no" title="statement not covered" >        if(config.record == true){</span>
+<span class="cstat-no" title="statement not covered" >            next();</span>
+        }
+    }
+}
+&nbsp;
+var listGroupMembershipsBysimCardV1 = <span class="fstat-no" title="function not covered" >function(req, res){</span>
+<span class="cstat-no" title="statement not covered" >    if ( !utils.checkUUID(req.params.tenantUUID) &amp;&amp; !utils.checkUUID(req.params.groupUUID) ) {</span>
+<span class="cstat-no" title="statement not covered" >        var error={</span>
+            status:400,
+            description:'输入参数有误'
+        }
+<span class="cstat-no" title="statement not covered" >        return common.errorReturn(res, error.status, error);</span>
+    }
+<span class="cstat-no" title="statement not covered" >    var tenantUUID=req.params.tenantUUID;</span>
+<span class="cstat-no" title="statement not covered" >    var simCardUUID = req.params.simCardUUID;</span>
+<span class="cstat-no" title="statement not covered" >    var queryConditions = req.query;</span>
+<span class="cstat-no" title="statement not covered" >    var expandStr  = req.query.expand;</span>
+<span class="cstat-no" title="statement not covered" >    var offset = common.ifNotReturnNum(Number(req.query.offset), 0);</span>
+<span class="cstat-no" title="statement not covered" >    var limit = common.ifNotReturnNum(Number(req.query.limit), 25);</span>
+<span class="cstat-no" title="statement not covered" >    var judgeQuery=common.isValidQueryParams(req, isValidQueryCondition, isExpandStrVail);</span>
+<span class="cstat-no" title="statement not covered" >    var listSuccess=Promise.resolve(groupMembershipProxy.queryGroupMemberships(tenantUUID, queryConditions, offset, limit, null, simCardUUID));</span>
+<span class="cstat-no" title="statement not covered" >    var countSuccess=Promise.resolve(groupMembershipProxy.getCount(tenantUUID, queryConditions, null));</span>
+<span class="cstat-no" title="statement not covered" >    Promise.all([judgeQuery, listSuccess, countSuccess]).then(<span class="fstat-no" title="function not covered" >function(results){</span></span>
+<span class="cstat-no" title="statement not covered" >        if(results[0].is ==  false){</span>
+<span class="cstat-no" title="statement not covered" >            throw results[0];</span>
+        }
+<span class="cstat-no" title="statement not covered" >        if(results[1].is ==  false){</span>
+<span class="cstat-no" title="statement not covered" >            throw results[1];</span>
+        }
+<span class="cstat-no" title="statement not covered" >        if(results[2].length==0){</span>
+<span class="cstat-no" title="statement not covered" >            results[2]=new Array();</span>
+        }
+<span class="cstat-no" title="statement not covered" >        var simCardResult = new Array;</span>
+<span class="cstat-no" title="statement not covered" >        for(let i in results[2]) {</span>
+<span class="cstat-no" title="statement not covered" >            simCardResult[i] = getSimCard(results[2][i].simCardUUID).then((result) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >                if (result.length == 0) {</span>
+<span class="cstat-no" title="statement not covered" >                    throw result;</span>
+                }
+<span class="cstat-no" title="statement not covered" >                results[2][i].directoryUUID = result[0].directoryUUID;</span>
+<span class="cstat-no" title="statement not covered" >                return results[2][i];</span>
+            })
+        }
+<span class="cstat-no" title="statement not covered" >        return  Promise.all(simCardResult).then((simResults) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >            var bodyInfo = returnResources.generateListGroupMembershipRetInfo(tenantUUID, queryConditions, offset, results[3], simResults);</span>
+<span class="cstat-no" title="statement not covered" >            if (!results[0].isExpand || simResults.length == 0) {</span>
+<span class="cstat-no" title="statement not covered" >                res.writeHead(200, {'Content-Type': contentType});</span>
+<span class="cstat-no" title="statement not covered" >                res.write(JSON.stringify(bodyInfo));</span>
+<span class="cstat-no" title="statement not covered" >                res.end();</span>
+<span class="cstat-no" title="statement not covered" >                return;</span>
+            }
+<span class="cstat-no" title="statement not covered" >            var count = 0;</span>
+<span class="cstat-no" title="statement not covered" >            new Promise(<span class="fstat-no" title="function not covered" >function(resolve){</span></span>
+<span class="cstat-no" title="statement not covered" >                for (var i = 0; i &lt; results[2].length; ++i) {</span>
+<span class="cstat-no" title="statement not covered" >                    getExpandInfo(expandStr, results[2][i], bodyInfo, true, i, tenantUUID).then(<span class="fstat-no" title="function not covered" >function (datas) {</span></span>
+<span class="cstat-no" title="statement not covered" >                        ++count;</span>
+<span class="cstat-no" title="statement not covered" >                        if (count == results[2].length) {</span>
+<span class="cstat-no" title="statement not covered" >                            return resolve(datas);</span>
+                        }
+                    })
+                }
+            }).then(<span class="fstat-no" title="function not covered" >function (bodyInfo) {</span>
+<span class="cstat-no" title="statement not covered" >                res.writeHead(200, {'Content-Type': contentType});</span>
+<span class="cstat-no" title="statement not covered" >                res.write(JSON.stringify(bodyInfo));</span>
+<span class="cstat-no" title="statement not covered" >                res.end();</span>
+<span class="cstat-no" title="statement not covered" >                return;</span>
+            });
+        });
+    }).catch(<span class="fstat-no" title="function not covered" >function(err) {</span>
+<span class="cstat-no" title="statement not covered" >        common.errReturnCommon(err, res);</span>
+<span class="cstat-no" title="statement not covered" >        return;</span>
+    });
+};
+exports.listGroupMembershipsBysimCard=<span class="fstat-no" title="function not covered" >function(req, res, next){</span>
+<span class="cstat-no" title="statement not covered" >    var version = req.params.version;</span>
+<span class="cstat-no" title="statement not covered" >    if(version == common.VERSION100){</span>
+<span class="cstat-no" title="statement not covered" >        listGroupMembershipsBysimCardV1(req, res);</span>
+<span class="cstat-no" title="statement not covered" >        if(config.record == true){</span>
+<span class="cstat-no" title="statement not covered" >            next();</span>
+        }
+    }
+}
+&nbsp;
+var bulkCreateGroupMembership =<span class="fstat-no" title="function not covered" >function(tenantUUID,  info, callback){</span>
+<span class="cstat-no" title="statement not covered" >    if ( !utils.checkUUID(tenantUUID)) {</span>
+<span class="cstat-no" title="statement not covered" >        var error = {</span>
+            status: 400,
+            description: '输入参数有误'
+        }
+<span class="cstat-no" title="statement not covered" >        common.errReturnCallback(error, callback)</span>
+    }
+<span class="cstat-no" title="statement not covered" >    info.tenantUUID=tenantUUID;</span>
+<span class="cstat-no" title="statement not covered" >    var directoryUUID;</span>
+<span class="cstat-no" title="statement not covered" >    if(info.simCard &amp;&amp; info.simCard.href){</span>
+<span class="cstat-no" title="statement not covered" >        if(info.simCard.href.indexOf('simCards/')&gt;-1){</span>
+<span class="cstat-no" title="statement not covered" >            directoryUUID = utils.getUUIDInHref(info.simCard.href, 'directories/', '/simCards');</span>
+        }
+    }
+<span class="cstat-no" title="statement not covered" >    var judgeResult = mainParam(info);</span>
+<span class="cstat-no" title="statement not covered" >    var isTenant = isTenantExist(tenantUUID);</span>
+<span class="cstat-no" title="statement not covered" >    var getExist=isExist(info.simCard, info.group, tenantUUID, null);</span>
+<span class="cstat-no" title="statement not covered" >    var topic='';</span>
+<span class="cstat-no" title="statement not covered" >    Promise.all([judgeResult, isTenant, getExist]).then(<span class="fstat-no" title="function not covered" >function(result){</span></span>
+<span class="cstat-no" title="statement not covered" >        if(result[0].flag==4){</span>
+<span class="cstat-no" title="statement not covered" >            throw result[0];</span>
+        }
+<span class="cstat-no" title="statement not covered" >        if(result[1].is==false){</span>
+<span class="cstat-no" title="statement not covered" >            throw result[1];</span>
+        }
+<span class="cstat-no" title="statement not covered" >        topic=result[1].topic;</span>
+<span class="cstat-no" title="statement not covered" >        if(result[2].flag!=0){</span>
+<span class="cstat-no" title="statement not covered" >            if(result[2].error &amp;&amp; result[2].error.status == 404){</span>
+<span class="cstat-no" title="statement not covered" >                return Promise.resolve(groupMembershipProxy.createGroupMembership(info));</span>
+            }
+<span class="cstat-no" title="statement not covered" >            var retData = {};</span>
+<span class="cstat-no" title="statement not covered" >            var error = new Error();</span>
+<span class="cstat-no" title="statement not covered" >            error.name = 'InternalError';</span>
+<span class="cstat-no" title="statement not covered" >            error.status = 409;</span>
+<span class="cstat-no" title="statement not covered" >            error.code = 7037;</span>
+<span class="cstat-no" title="statement not covered" >            error.message = errorCodeTable.errorCode2Text( error.code );</span>
+<span class="cstat-no" title="statement not covered" >            error.description = 'The resource is exist! the resource name is: ' + info.name;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            retData.error = error;</span>
+<span class="cstat-no" title="statement not covered" >            retData.is = false;</span>
+<span class="cstat-no" title="statement not covered" >            retData.flag = 2;</span>
+<span class="cstat-no" title="statement not covered" >            throw retData;</span>
+        }
+    }).then(<span class="fstat-no" title="function not covered" >function(result){</span>
+<span class="cstat-no" title="statement not covered" >        result.directoryUUID=directoryUUID;</span>
+<span class="cstat-no" title="statement not covered" >        var bodyDataJson = returnResources.generateGroupMembershipRetInfo(tenantUUID, result);</span>
+<span class="cstat-no" title="statement not covered" >        if (config.is_sendMessage) {</span>
+<span class="cstat-no" title="statement not covered" >            var message = new Message(MessageId.Create_Service_Success, bodyDataJson);</span>
+<span class="cstat-no" title="statement not covered" >            merchandiseComponentProducer.sendMessage(topic, message, <span class="fstat-no" title="function not covered" >function(error, data){</span></span>
+<span class="cstat-no" title="statement not covered" >                console.log(error);</span>
+            });
+        }
+<span class="cstat-no" title="statement not covered" >        callback(null, bodyDataJson);</span>
+<span class="cstat-no" title="statement not covered" >        return;</span>
+    }).catch(<span class="fstat-no" title="function not covered" >function(err) {</span>
+<span class="cstat-no" title="statement not covered" >        common.errReturnCallback(err, callback);</span>
+<span class="cstat-no" title="statement not covered" >        return;</span>
+    });
+};
+&nbsp;
+var bulkDeleteGroupMembership=<span class="fstat-no" title="function not covered" >function(tenantUUID, groupMembershipUUID,  callback){</span>
+<span class="cstat-no" title="statement not covered" >    if ( !utils.checkUUID(tenantUUID)&amp;&amp; !utils.checkUUID(groupMembershipUUID)) {</span>
+<span class="cstat-no" title="statement not covered" >        var error;</span>
+<span class="cstat-no" title="statement not covered" >        error.status=400;</span>
+<span class="cstat-no" title="statement not covered" >        error.description='输入参数有误';</span>
+<span class="cstat-no" title="statement not covered" >        common.errReturnCallback(error, callback);</span>
+    }
+<span class="cstat-no" title="statement not covered" >    var isMembership = isExist(null, null, tenantUUID, groupMembershipUUID);</span>
+<span class="cstat-no" title="statement not covered" >    var delGroupMembership = Promise.resolve(groupMembershipProxy.deleteGroupMembership(groupMembershipUUID));</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    var ep = new eventProxy();</span>
+<span class="cstat-no" title="statement not covered" >    ep.on('send_Message', <span class="fstat-no" title="function not covered" >function(){</span></span>
+<span class="cstat-no" title="statement not covered" >        Promise.resolve(isTenantExist(tenantUUID)).then(<span class="fstat-no" title="function not covered" >function(result){</span></span>
+<span class="cstat-no" title="statement not covered" >            if (config.is_sendMessage) {</span>
+<span class="cstat-no" title="statement not covered" >                var message = new Message(MessageId.Delete_Service_Success, 204);</span>
+<span class="cstat-no" title="statement not covered" >                merchandiseComponentProducer.sendMessage(result.topic, message, <span class="fstat-no" title="function not covered" >function(error, data){</span></span>
+<span class="cstat-no" title="statement not covered" >                    console.log(error);</span>
+                });
+            }
+        });
+    });
+<span class="cstat-no" title="statement not covered" >    Promise.all([isMembership, delGroupMembership]).then(<span class="fstat-no" title="function not covered" >function (result) {</span></span>
+<span class="cstat-no" title="statement not covered" >        if(result[0].is==false){</span>
+<span class="cstat-no" title="statement not covered" >            throw result[0];</span>
+        }
+<span class="cstat-no" title="statement not covered" >        var judge = common.isOnly(null, result[1]);</span>
+<span class="cstat-no" title="statement not covered" >        if (judge.is) {</span>
+<span class="cstat-no" title="statement not covered" >            ep.emit('send_Message');</span>
+<span class="cstat-no" title="statement not covered" >            callback(null, 204);</span>
+<span class="cstat-no" title="statement not covered" >            return;</span>
+        }
+<span class="cstat-no" title="statement not covered" >        var error = judge.error;</span>
+<span class="cstat-no" title="statement not covered" >        if (judge.flag == 1) {</span>
+<span class="cstat-no" title="statement not covered" >            error.description = 'Could not find the resources you want to retrieve groupMembership.the uuid: ' + tenantUUID;</span>
+        }else <span class="cstat-no" title="statement not covered" >if (judge.flag == 2) {</span>
+<span class="cstat-no" title="statement not covered" >            error.description = 'Find much resource when retrieve groupMembership. the uuid: ' + tenantUUID;</span>
+        }
+<span class="cstat-no" title="statement not covered" >        throw judge;</span>
+&nbsp;
+    }).catch(<span class="fstat-no" title="function not covered" >function (err) {</span>
+<span class="cstat-no" title="statement not covered" >        common.errReturnCallback(err, callback);</span>
+<span class="cstat-no" title="statement not covered" >        return;</span>
+    });
+};
+&nbsp;
+var bulkRetrieveGroupMembership =<span class="fstat-no" title="function not covered" >function(tenantUUID, groupMembershipUUID,  queryConditions, callback){</span>
+<span class="cstat-no" title="statement not covered" >    if ( !utils.checkUUID(tenantUUID)&amp;&amp;!utils.checkUUID(groupMembershipUUID)) {</span>
+<span class="cstat-no" title="statement not covered" >        var error;</span>
+<span class="cstat-no" title="statement not covered" >        error.status=400;</span>
+<span class="cstat-no" title="statement not covered" >        error.description='输入参数有误';</span>
+<span class="cstat-no" title="statement not covered" >        common.errReturnCallback(error, callback);</span>
+    }
+<span class="cstat-no" title="statement not covered" >    var expandStr = queryConditions.expand;</span>
+<span class="cstat-no" title="statement not covered" >    var judgeParams = common.isValidQueryParams2(queryConditions, null, isExpandStrVail);</span>
+<span class="cstat-no" title="statement not covered" >    var retOrganization=Promise.resolve(groupMembershipProxy.retrieveGroupMembership(tenantUUID, groupMembershipUUID));</span>
+<span class="cstat-no" title="statement not covered" >    Promise.all([judgeParams, retOrganization]).then(<span class="fstat-no" title="function not covered" >function(results){</span></span>
+<span class="cstat-no" title="statement not covered" >        if(results[0].is==false){</span>
+<span class="cstat-no" title="statement not covered" >            throw  results[0];</span>
+        }
+<span class="cstat-no" title="statement not covered" >        var judge = common.isOnly(null, results[1].length);</span>
+<span class="cstat-no" title="statement not covered" >        if(judge.is){</span>
+<span class="cstat-no" title="statement not covered" >            return   getSimCard(results[1][0].simCardUUID).then((result) =&gt;{</span>
+<span class="cstat-no" title="statement not covered" >                if(result.length == 0){</span>
+<span class="cstat-no" title="statement not covered" >                    return result;</span>
+                }
+<span class="cstat-no" title="statement not covered" >                results[1][0].directoryUUID = result[0].directoryUUID;</span>
+<span class="cstat-no" title="statement not covered" >                var bodyInfo = returnResources.generateGroupMembershipRetInfo(tenantUUID, results[1][0]);</span>
+<span class="cstat-no" title="statement not covered" >                if(!results[0].isExpand){</span>
+<span class="cstat-no" title="statement not covered" >                    return bodyInfo;</span>
+                }
+<span class="cstat-no" title="statement not covered" >                return new Promise(<span class="fstat-no" title="function not covered" >function(resolve){</span></span>
+<span class="cstat-no" title="statement not covered" >                    getExpandInfo(expandStr, results[1][0], bodyInfo, false, 0, tenantUUID)</span>
+                        .then(<span class="fstat-no" title="function not covered" >function(data){</span>
+<span class="cstat-no" title="statement not covered" >                            return resolve(data);</span>
+                        });
+                })
+            })
+        }
+<span class="cstat-no" title="statement not covered" >        var error = judge.error;</span>
+<span class="cstat-no" title="statement not covered" >        if(judge.flag == 1){</span>
+<span class="cstat-no" title="statement not covered" >            error.description = 'Could not find the resources you want to retrieve groupMembership.the uuid: ' + groupMembershipUUID;</span>
+        }else <span class="cstat-no" title="statement not covered" >if(judge.flag == 2){</span>
+<span class="cstat-no" title="statement not covered" >            error.description = 'Find much resource when retrieve groupMembership. the uuid: ' + groupMembershipUUID;</span>
+        }
+<span class="cstat-no" title="statement not covered" >        throw judge;</span>
+    }).then(<span class="fstat-no" title="function not covered" >function(bodyInfo){</span>
+<span class="cstat-no" title="statement not covered" >        callback(null, bodyInfo);</span>
+<span class="cstat-no" title="statement not covered" >        return;</span>
+    }).catch(<span class="fstat-no" title="function not covered" >function(err) {</span>
+<span class="cstat-no" title="statement not covered" >        common.errReturnCallback(err, callback);</span>
+<span class="cstat-no" title="statement not covered" >        return;</span>
+    });
+};
+&nbsp;
+var bulkListGroupMembership =<span class="fstat-no" title="function not covered" >function( tenantUUID, queryConditions, callback){</span>
+<span class="cstat-no" title="statement not covered" >    if (!utils.checkUUID(tenantUUID)) {</span>
+<span class="cstat-no" title="statement not covered" >        var error = {</span>
+            status: 400,
+            description: '输入参数有误'
+        }
+<span class="cstat-no" title="statement not covered" >        common.errReturnCallback(error, callback);</span>
+    }
+<span class="cstat-no" title="statement not covered" >    var offset = common.ifNotReturnNum(Number(queryConditions.offset), 0);</span>
+<span class="cstat-no" title="statement not covered" >    var limit = common.ifNotReturnNum(Number(queryConditions.limit), 25);</span>
+<span class="cstat-no" title="statement not covered" >    var expandStr = queryConditions.expand;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    var judgeQuery = common.isValidQueryParams2(queryConditions, isValidQueryCondition, isExpandStrVail);</span>
+<span class="cstat-no" title="statement not covered" >    var isTenant = isTenantExist(tenantUUID);</span>
+<span class="cstat-no" title="statement not covered" >    var listSuccess = Promise.resolve(groupMembershipProxy.queryGroupMemberships(tenantUUID, queryConditions, offset, limit));</span>
+<span class="cstat-no" title="statement not covered" >    var countSuccess = Promise.resolve(groupMembershipProxy.getCount(tenantUUID, queryConditions));</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    Promise.all([judgeQuery, isTenant, listSuccess, countSuccess]).then(<span class="fstat-no" title="function not covered" >function (results) {</span></span>
+<span class="cstat-no" title="statement not covered" >        if (results[0].is == false) {</span>
+<span class="cstat-no" title="statement not covered" >            throw results[0];</span>
+        }
+<span class="cstat-no" title="statement not covered" >        if (results[1].is == false) {</span>
+<span class="cstat-no" title="statement not covered" >            throw results[1];</span>
+        }
+<span class="cstat-no" title="statement not covered" >        if (results[2].length == 0) {</span>
+<span class="cstat-no" title="statement not covered" >            results[2] = new Array();</span>
+        }
+<span class="cstat-no" title="statement not covered" >        var simCardResult = new Array;</span>
+<span class="cstat-no" title="statement not covered" >        for(let i in results[2]) {</span>
+<span class="cstat-no" title="statement not covered" >            simCardResult[i] = getSimCard(results[2][i].simCardUUID).then((result) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >                if (result.length == 0) {</span>
+<span class="cstat-no" title="statement not covered" >                    throw result;</span>
+                }
+<span class="cstat-no" title="statement not covered" >                results[2][i].directoryUUID = result[0].directoryUUID;</span>
+<span class="cstat-no" title="statement not covered" >                return results[2][i];</span>
+            })
+        }
+<span class="cstat-no" title="statement not covered" >        return  Promise.all(simCardResult).then((simResults) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >            var bodyInfo = returnResources.generateListGroupMembershipRetInfo(tenantUUID, queryConditions, offset, results[3], simResults);</span>
+<span class="cstat-no" title="statement not covered" >            if (!results[0].isExpand || simResults.length == 0) {</span>
+<span class="cstat-no" title="statement not covered" >                callback(null, bodyInfo);</span>
+<span class="cstat-no" title="statement not covered" >                return;</span>
+            }
+<span class="cstat-no" title="statement not covered" >            var count = 0;</span>
+<span class="cstat-no" title="statement not covered" >            new Promise(<span class="fstat-no" title="function not covered" >function(resolve){</span></span>
+<span class="cstat-no" title="statement not covered" >                for (var i = 0; i &lt; results[2].length; ++i) {</span>
+<span class="cstat-no" title="statement not covered" >                    getExpandInfo(expandStr, results[2][i], bodyInfo, true, i, tenantUUID).then(<span class="fstat-no" title="function not covered" >function (datas) {</span></span>
+<span class="cstat-no" title="statement not covered" >                        ++count;</span>
+<span class="cstat-no" title="statement not covered" >                        if (count == results[2].length) {</span>
+<span class="cstat-no" title="statement not covered" >                            return resolve(datas);</span>
+                        }
+                    })
+                }
+            }).then(<span class="fstat-no" title="function not covered" >function (bodyInfo) {</span>
+<span class="cstat-no" title="statement not covered" >                callback(null, bodyInfo);</span>
+<span class="cstat-no" title="statement not covered" >                return;</span>
+            });
+        });
+    }).catch(<span class="fstat-no" title="function not covered" >function (err) {</span>
+<span class="cstat-no" title="statement not covered" >        common.errReturnCallback(err, callback);</span>
+<span class="cstat-no" title="statement not covered" >        return;</span>
+    });
+};
+&nbsp;
+exports.bulkOperator = <span class="fstat-no" title="function not covered" >function(active, url, urlPath,  params, callback) {</span>
+<span class="cstat-no" title="statement not covered" >    var tenantUUID ='', isList=false, groupMembershipUUID= '', queryConditions='';</span>
+<span class="cstat-no" title="statement not covered" >    if(utils.isGroupMembershipsURL(url)){</span>
+<span class="cstat-no" title="statement not covered" >        tenantUUID =utils.getUUIDInHref(urlPath, 'tenants/', '/groupMemberships');</span>
+<span class="cstat-no" title="statement not covered" >        groupMembershipUUID=utils.getUUIDInHref(urlPath, 'groupMemberships/');</span>
+    }else <span class="cstat-no" title="statement not covered" >if(utils.isGroupMembershipURL(url)){</span>
+<span class="cstat-no" title="statement not covered" >        tenantUUID =utils.getUUIDInHref(urlPath, 'tenants/', '/groupMemberships');</span>
+<span class="cstat-no" title="statement not covered" >        isList=true;</span>
+    }
+<span class="cstat-no" title="statement not covered" >    if(active=='post'){</span>
+<span class="cstat-no" title="statement not covered" >        bulkCreateGroupMembership(tenantUUID,  params, callback);</span>
+    }else <span class="cstat-no" title="statement not covered" >if(active=='delete'){</span>
+<span class="cstat-no" title="statement not covered" >        bulkDeleteGroupMembership(tenantUUID, groupMembershipUUID, callback);</span>
+    } else <span class="cstat-no" title="statement not covered" >if(active=='get'){</span>
+<span class="cstat-no" title="statement not covered" >        queryConditions=utils.parseUrlParam(url);</span>
+<span class="cstat-no" title="statement not covered" >        if(isList){</span>
+<span class="cstat-no" title="statement not covered" >            bulkListGroupMembership(tenantUUID, queryConditions, callback);</span>
+        }else{
+<span class="cstat-no" title="statement not covered" >            bulkRetrieveGroupMembership(tenantUUID, groupMembershipUUID, queryConditions, callback);</span>
+        }
+    }
+}</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Thu Jul 14 2016 11:09:59 GMT+0800 (中国标准时间)
+</div>
+</div>
+<script src="../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../sorter.js"></script>
+</body>
+</html>

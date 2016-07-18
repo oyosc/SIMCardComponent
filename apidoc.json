@@ -1,0 +1,28 @@
+{
+  "name": "SIMCardComponent",
+  "version": "1.0.0",
+  "description": "SIMCardComponent apidoc",
+  "title": "SIMCardComponent",
+  "url" : "https://127.0.0.1:3000/api",
+  "header": {
+    "title": "SIM卡组件总纲",
+    "filename": "header.md"
+  },
+  "footer": {
+    "title": "error code",
+    "filename": "error-code.md"
+  },
+  "order": [
+    "Tenant",
+    "Organization",
+    "Directory",
+    "Group",
+    "SIMCard",
+    "Flow",
+    "BatchNORule",
+    "BatchNumber",
+    "OrganizationMembership",
+    "GroupMembership",
+    "Error"
+  ]
+}

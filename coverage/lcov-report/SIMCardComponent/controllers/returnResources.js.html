@@ -1,0 +1,1256 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for SIMCardComponent\controllers\returnResources.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../index.html">all files</a> / <a href="index.html">SIMCardComponent/controllers/</a> returnResources.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">99.11% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>223/225</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">92.42% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>61/66</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>32/32</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">99.11% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>223/225</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line high'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381
+382
+383
+384
+385
+386
+387
+388
+389
+390
+391
+392
+393
+394
+395
+396
+397
+398</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">17×</span>
+<span class="cline-any cline-yes">17×</span>
+<span class="cline-any cline-yes">17×</span>
+<span class="cline-any cline-yes">17×</span>
+<span class="cline-any cline-yes">17×</span>
+<span class="cline-any cline-yes">17×</span>
+<span class="cline-any cline-yes">17×</span>
+<span class="cline-any cline-yes">17×</span>
+<span class="cline-any cline-yes">17×</span>
+<span class="cline-any cline-yes">17×</span>
+<span class="cline-any cline-yes">17×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">11×</span>
+<span class="cline-any cline-yes">11×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">11×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">11×</span>
+<span class="cline-any cline-yes">11×</span>
+<span class="cline-any cline-yes">13×</span>
+<span class="cline-any cline-yes">13×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">11×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">14×</span>
+<span class="cline-any cline-yes">14×</span>
+<span class="cline-any cline-yes">14×</span>
+<span class="cline-any cline-yes">14×</span>
+<span class="cline-any cline-yes">14×</span>
+<span class="cline-any cline-yes">14×</span>
+<span class="cline-any cline-yes">14×</span>
+<span class="cline-any cline-yes">14×</span>
+<span class="cline-any cline-yes">14×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">7×</span>
+<span class="cline-any cline-yes">7×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">17×</span>
+<span class="cline-any cline-yes">17×</span>
+<span class="cline-any cline-yes">17×</span>
+<span class="cline-any cline-yes">17×</span>
+<span class="cline-any cline-yes">17×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">15×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">17×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">16×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">17×</span>
+<span class="cline-any cline-yes">17×</span>
+<span class="cline-any cline-yes">17×</span>
+<span class="cline-any cline-yes">17×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">13×</span>
+<span class="cline-any cline-yes">13×</span>
+<span class="cline-any cline-yes">13×</span>
+<span class="cline-any cline-yes">13×</span>
+<span class="cline-any cline-yes">13×</span>
+<span class="cline-any cline-yes">13×</span>
+<span class="cline-any cline-yes">13×</span>
+<span class="cline-any cline-yes">13×</span>
+<span class="cline-any cline-yes">13×</span>
+<span class="cline-any cline-yes">13×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
+ * Copyright(C),
+ * FileName:  retrunResources.js
+ * Author: yansha
+ * Version: 1.0.0
+ * Date: 2016/5/25  17:53
+ * Description:
+ */
+&nbsp;
+"use strict";
+var URIParser = require('./uri');
+var common = require('./common');
+var querystring = require('querystring');
+&nbsp;
+//tenant
+exports.generateTenantRetInfo = function(info) {
+    var exclude = new Array();
+    var retInfo = {};
+    common.convert2ReturnData(retInfo, info, exclude);
+    retInfo.href=URIParser.tenantURI(info.uuid);
+    retInfo.groups={ 'href': URIParser.groupURI(info.uuid)};
+    retInfo.organizations={ 'href': URIParser.organizationURI(info.uuid)};
+    retInfo.simCards={ 'href': URIParser.simCardByTenantURI(info.uuid)};
+    retInfo.batchNORules={ 'href': URIParser.batchNORuleURI(info.uuid)};
+    retInfo.batchNumbers={ 'href': URIParser.batchNumberByTenantURI(info.uuid)};
+    retInfo.directories={ 'href': URIParser.directoryURI(info.uuid)};
+    retInfo.flows={ 'href': URIParser.flowByTenantURI(info.uuid)};
+    return retInfo;
+}
+exports.generateListTenantRetInfo = function(queryConditions, offset, total, info) {
+    var expandStr = querystring.stringify(queryConditions);
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (expandStr!='') {
+<span class="cstat-no" title="statement not covered" >        expandStr = '?' + expandStr;</span>
+    }
+&nbsp;
+    var retInfo = {
+        'href': URIParser.tenantURI() + expandStr,
+        'offset': offset,
+        'limit': info.length,
+        'size' : total,
+        'items': new Array()
+    };
+&nbsp;
+    var tmp = this;
+    info.forEach(function(element){
+        var oneItem = tmp.generateTenantRetInfo(element);
+        retInfo.items.push(oneItem);
+    });
+    return retInfo;
+}
+&nbsp;
+//organization
+exports.generateOrganizationRetInfo = function(info) {
+    var exclude = new Array();
+    exclude.push('tenantUUID');
+    var retInfo = {};
+    common.convert2ReturnData(retInfo, info, exclude);
+    retInfo.href = URIParser.organizationURI(info.tenantUUID, info.uuid);
+    retInfo.simCards= { 'href': URIParser.simCardByOrganizationURI(info.tenantUUID, info.uuid) };
+    retInfo.groups= { 'href': URIParser.groupByOrganizationURI(info.tenantUUID, info.uuid) };
+    retInfo.directories= { 'href': URIParser.directoryByOrganizationURI(info.tenantUUID, info.uuid) };
+    retInfo.organizationMemberships= { 'href': URIParser.organizationMembershipByOrganizationURI(info.tenantUUID, info.uuid) };
+    retInfo.tenant={ 'href': URIParser.tenantURI(info.tenantUUID)};
+    return retInfo;
+}
+&nbsp;
+exports.generateListOrganizationRetInfo = function(tenantUUID, queryConditions, offset, total, info, directoryUUID, groupUUID, simCardUUID) {
+    var expandStr = querystring.stringify(queryConditions);
+    if (expandStr!='') {
+        expandStr = '?' + expandStr;
+    }
+&nbsp;
+    var retInfo = {
+        'href': simCardUUID?  URIParser.organizationBySIMCardURI(tenantUUID, directoryUUID, simCardUUID) + expandStr : groupUUID?  URIParser.organizationsByGroupURI(tenantUUID, groupUUID) + expandStr : directoryUUID? URIParser.organizationByDirectoryURI(tenantUUID, directoryUUID) + expandStr: URIParser.organizationURI(tenantUUID) + expandStr,
+        'offset': offset,
+        'limit': info.length,
+        'size' : total,
+        'items': new Array()
+    };
+&nbsp;
+    var tmp = this;
+    info.forEach(function(element){
+        var oneItem = tmp.generateOrganizationRetInfo(element);
+        retInfo.items.push(oneItem);
+    });
+    return retInfo;
+}
+&nbsp;
+&nbsp;
+//organizationMembership
+exports.generateOrganizationMembershipRetInfo = function(info) {
+    var exclude = new Array( 'tenantUUID', 'directoryUUID', 'organizationUUID');
+    var retInfo = {};
+    common.convert2ReturnData(retInfo, info, exclude);
+    retInfo.href = URIParser.organizationMembershipURI(info.tenantUUID, info.uuid);
+    <span class="missing-if-branch" title="else path not taken" >E</span>if(info.type == 'directory'){
+        retInfo.deviceStoreMapping ={ 'href': URIParser.directoryURI(info.tenantUUID, info.deviceStoreMappingUUID)};
+    }else{
+<span class="cstat-no" title="statement not covered" >        retInfo.deviceStoreMapping ={ 'href': URIParser.groupURI(info.tenantUUID, info.deviceStoreMappingUUID)};</span>
+    }
+&nbsp;
+    retInfo.organization ={'href': URIParser.organizationURI(info.tenantUUID, info.organizationUUID)};
+    retInfo.tenant={ 'href': URIParser.tenantURI(info.tenantUUID)};
+    return retInfo;
+}
+&nbsp;
+exports.generateListOrganizationMembershipRetInfo = function(tenantUUID, queryConditions, offset, total, info, organizationUUID) {
+    var expandStr = querystring.stringify(queryConditions);
+    if (expandStr!='') {
+        expandStr = '?' + expandStr;
+    }
+&nbsp;
+    var retInfo = {
+        'href': organizationUUID ? URIParser.organizationMembershipByOrganizationURI(tenantUUID, organizationUUID) + expandStr : URIParser.organizationMembershipURI(tenantUUID) + expandStr,
+        'offset': offset,
+        'limit': info.length,
+        'size' : total,
+        'items': new Array()
+    };
+&nbsp;
+    var tmp = this;
+    info.forEach(function(element){
+        var oneItem = tmp.generateOrganizationMembershipRetInfo(element);
+        retInfo.items.push(oneItem);
+    });
+    return retInfo;
+}
+&nbsp;
+//directory
+exports.generateDirectoryRetInfo = function(info) {
+    var exclude = new Array( 'tenantUUID');
+    var retInfo = {};
+    common.convert2ReturnData(retInfo, info, exclude);
+    retInfo.href = URIParser.directoryURI(info.tenantUUID, info.uuid);
+    retInfo.organizations={'href': URIParser.organizationByDirectoryURI(info.tenantUUID, info.uuid)};
+    retInfo.organizationMemberships={'href': URIParser.organizationMembershipByDirectoryURI(info.tenantUUID, info.uuid)};
+    retInfo.simCards={'href': URIParser.simCardByDirectoryURI(info.tenantUUID, info.uuid)};
+    retInfo.tenant={ 'href': URIParser.tenantURI(info.tenantUUID)};
+    return retInfo;
+}
+exports.generateListDirectoryRetInfo = function(tenantUUID, queryConditions, offset, total, info, organizationUUID) {
+    var expandStr = querystring.stringify(queryConditions);
+    if (expandStr!='') {
+        expandStr = '?' + expandStr;
+    }
+    var retInfo = {
+        'href': organizationUUID ?  URIParser.directoryByOrganizationURI(tenantUUID, organizationUUID) + expandStr : URIParser.directoryURI(tenantUUID) + expandStr,
+        'offset': offset,
+        'limit': info.length,
+        'size' : total,
+        'items': new Array()
+    };
+&nbsp;
+    var tmp = this;
+    info.forEach(function(element){
+        var oneItem = tmp.generateDirectoryRetInfo(element);
+        retInfo.items.push(oneItem);
+    });
+    return retInfo;
+}
+&nbsp;
+//group
+exports.generateGroupRetInfo = function(tenantUUID, info) {
+    var exclude = new Array();
+    exclude.push('tenantUUID');
+    var retInfo = {};
+    common.convert2ReturnData(retInfo, info, exclude);
+    if(info.organizations &amp;&amp; info.organizations.length &gt;=1){
+        retInfo.organizations = info.organizations;
+    }else{
+        retInfo.organizations={ 'href': URIParser.organizationsByGroupURI(tenantUUID, info.uuid)};
+    }
+    if(info.groupMemberships &amp;&amp; info.groupMemberships.length &gt;=1){
+        retInfo.groupMemberships = info.groupMemberships;
+    }else{
+        retInfo.groupMemberships={ 'href': URIParser.groupMembershipsByGroupURI(tenantUUID, info.uuid)};
+    }
+    retInfo.href = URIParser.groupURI(tenantUUID, info.uuid);
+    retInfo.tenants = {'href': URIParser.tenantURI(tenantUUID)};
+    retInfo.organizationMemberships = {'href': URIParser.organizationMembershipsByGroupURI(tenantUUID, info.uuid)};
+    return retInfo;
+}
+&nbsp;
+exports.generateListGroupRetInfo = function(tenantUUID, queryConditions, offset, total, info, directoryUUID, simCardUUID, organizationUUID){
+    var expandStr = querystring.stringify(queryConditions);
+    if(expandStr != ''){
+        expandStr += '?';
+    }
+    var retInfo = {
+        'href': organizationUUID? URIParser.groupByOrganizationURI(tenantUUID, organizationUUID) : simCardUUID? URIParser.groupBySIMCardURI(tenantUUID, directoryUUID, simCardUUID)  : URIParser.groupURI(tenantUUID),
+        'offset': offset,
+        'limit': info.length,
+        'size' : total,
+        'items': new Array()
+    };
+&nbsp;
+    var tmp = this;
+    info.forEach(function(element){
+        var oneItem = tmp.generateGroupRetInfo(tenantUUID, element);
+        retInfo.items.push(oneItem);
+    });
+&nbsp;
+    return retInfo;
+&nbsp;
+}
+//groupMembership
+exports.generateGroupMembershipRetInfo = function(tenantUUID, info) {
+    var exclude = new Array( 'tenantUUID', 'groupUUID', 'directoryUUID', 'simCardUUID');
+    var retInfo = {};
+    common.convert2ReturnData(retInfo, info, exclude);
+    retInfo.href = URIParser.groupMembershipURI(tenantUUID, info.uuid);
+    retInfo.simCard ={'href': URIParser.simCardURI(tenantUUID, info.directoryUUID, info.simCardUUID)} ;
+    retInfo.group ={'href': URIParser.groupURI(tenantUUID, info.groupUUID)} ;
+    retInfo.tenant={ 'href': URIParser.tenantURI(tenantUUID)};
+    return retInfo;
+}
+&nbsp;
+exports.generateListGroupMembershipRetInfo = function(tenantUUID, queryConditions, offset, total, info, directoryUUID, simCardUUID, groupUUID ) {
+    var expandStr = querystring.stringify(queryConditions);
+    if (expandStr!='') {
+        expandStr = '?' + expandStr;
+    }
+&nbsp;
+    var retInfo = {
+        'href': simCardUUID? URIParser.groupMembershipBySIMCardURI(tenantUUID, directoryUUID, simCardUUID ): groupUUID ? URIParser.groupMembershipsByGroupURI(tenantUUID, groupUUID) : URIParser.groupMembershipURI(tenantUUID),
+        'offset': offset,
+        'limit': info.length,
+        'size' : total,
+        'items': new Array()
+    };
+&nbsp;
+    var tmp = this;
+    info.forEach(function(element){
+        var oneItem = tmp.generateGroupMembershipRetInfo(tenantUUID, element);
+        retInfo.items.push(oneItem);
+    });
+    return retInfo;
+}
+&nbsp;
+//simCard
+exports.generateSIMCardRetInfo = function(tenantUUID, info) {
+    var exclude = new Array( 'tenantUUID', 'directoryUUID');
+    var retInfo = {};
+    common.convert2ReturnData(retInfo, info, exclude);
+    retInfo.href = URIParser.simCardURI(tenantUUID, info.directoryUUID, info.uuid);
+    retInfo.directory ={ 'href':  URIParser.directoryURI(tenantUUID, info.directoryUUID)};
+    retInfo.groups ={ 'href':  URIParser.groupBySIMCardURI(tenantUUID, info.directoryUUID, info.uuid)};
+    retInfo.groupMemberships ={ 'href':  URIParser.groupMembershipBySIMCardURI(tenantUUID, info.directoryUUID, info.uuid)};
+    retInfo.tenant={ 'href': URIParser.tenantURI(tenantUUID)};
+    retInfo.flows={ 'href': URIParser.flowURI(tenantUUID, info.directoryUUID, info.uuid)};
+    return retInfo;
+}
+exports.generateListSIMCardRetInfo = function(tenantUUID, directoryUUID, queryConditions, offset, total, info, groupUUID, organizationUUID) {
+    var expandStr = querystring.stringify(queryConditions);
+    var b = encodeURIComponent(expandStr);
+    if (expandStr!='') {
+        expandStr = '?' + expandStr;
+    }
+    var retInfo = {
+        'href':  organizationUUID? URIParser.simCardByOrganizationURI(tenantUUID, organizationUUID) + expandStr : groupUUID? URIParser.simCardByGroupURI(tenantUUID, groupUUID) + expandStr : directoryUUID? URIParser.simCardURI(tenantUUID, directoryUUID) + expandStr : <span class="branch-1 cbranch-no" title="branch not covered" >URIParser.simCardByTenantURI(tenantUUID) + expandStr,</span>
+        'offset': offset,
+        'limit': info.length,
+        'size' : total,
+        'items': new Array()
+    };
+&nbsp;
+    var tmp = this;
+    info.forEach(function(element){
+        var oneItem = tmp.generateSIMCardRetInfo(tenantUUID, element);
+        retInfo.items.push(oneItem);
+    });
+    return retInfo;
+}
+&nbsp;
+//flow
+exports.generateFlowRetInfo = function(tenantUUID, directoryUUID, info) {
+    var exclude = new Array( 'tenantUUID', 'directoryUUID');
+    var retInfo = {};
+    common.convert2ReturnData(retInfo, info, exclude);
+    retInfo.href = URIParser.flowURI(tenantUUID, directoryUUID, info.simCardUUID, info.uuid);
+    retInfo.simCard ={ 'href':  URIParser.simCardURI(tenantUUID, directoryUUID, info.simCardUUID)};
+    retInfo.directory ={ 'href':  URIParser.directoryURI(tenantUUID, directoryUUID)};
+    retInfo.tenant={ 'href': URIParser.tenantURI(tenantUUID)};
+    return retInfo;
+}
+exports.generateListFlowRetInfo = function(tenantUUID, directoryUUID, simcardUUID, queryConditions, offset, total, info) {
+    var expandStr = querystring.stringify(queryConditions);
+    if (expandStr!='') {
+        expandStr = '?' + expandStr;
+    }
+    var retInfo = {
+        'href':  simcardUUID? URIParser.flowURI(tenantUUID, directoryUUID, simcardUUID) + expandStr : <span class="branch-1 cbranch-no" title="branch not covered" >URIParser.flowByTenantURI(tenantUUID) + expandStr,</span>
+        'offset': offset,
+        'limit': info.length,
+        'size' : total,
+        'items': new Array()
+    };
+&nbsp;
+    var tmp = this;
+    info.forEach(function(element){
+        var oneItem = tmp.generateFlowRetInfo(tenantUUID, directoryUUID, element);
+        retInfo.items.push(oneItem);
+    });
+    return retInfo;
+}
+exports.generateMonthFlowRetInfo = function(tenantUUID, directoryUUID, simcardUUID, queryConditions, info) {
+    var expandStr = querystring.stringify(queryConditions);
+    <span class="missing-if-branch" title="else path not taken" >E</span>if (expandStr!='') {
+        expandStr = '?' + expandStr;
+    }
+    var retInfo = {
+        'href':   URIParser.flowURI(tenantUUID, directoryUUID, simcardUUID) + expandStr ,
+        'count': info
+    };
+    return retInfo;
+}
+//BatchNORule
+exports.generateBatchNORuleRetInfo = function(info) {
+    var exclude = new Array('tenantUUID');
+    var retInfo = {};
+    common.convert2ReturnData(retInfo, info, exclude);
+    retInfo.href = URIParser.batchNORuleURI(info.tenantUUID, info.uuid);
+    retInfo.batchNumbers ={ 'href':  URIParser.batchNumberURI(info.tenantUUID, info.uuid)};
+    retInfo.tenant={ 'href': URIParser.tenantURI(info.tenantUUID)};
+    return retInfo;
+}
+exports.generateListBatchNORuleRetInfo = function(tenantUUID, queryConditions, offset, total, info) {
+    var expandStr = querystring.stringify(queryConditions);
+    if (expandStr!='') {
+        expandStr = '?' + expandStr;
+    }
+    var retInfo = {
+        'href': URIParser.batchNORuleURI(tenantUUID) + expandStr,
+        'offset': offset,
+        'limit': info.length,
+        'size' : total,
+        'items': new Array()
+    };
+&nbsp;
+    var tmp = this;
+    info.forEach(function(element){
+        var oneItem = tmp.generateBatchNORuleRetInfo(element);
+        retInfo.items.push(oneItem);
+    });
+    return retInfo;
+}
+&nbsp;
+//BatchNumber
+exports.generateBatchNumbersRetInfo = function(tenantUUID, info) {
+    var exclude = new Array();
+    exclude.push('tenantUUID');
+    exclude.push('batchNORuleUUID');
+    var retInfo = {};
+    common.convert2ReturnData(retInfo, info, exclude);
+    if(info.tenants &amp;&amp; info.tenants.tag == 'tenant'){
+        retInfo.tenants = info.tenants;
+    }else{
+        retInfo.tenants={ 'href': URIParser.tenantURI(tenantUUID)};
+    }
+    if(info.batchNORules &amp;&amp; info.batchNORules.tag == 'batchNORule'){
+        retInfo.batchNORules = info.batchNORules;
+    }else{
+        retInfo.batchNORules = {'href': URIParser.batchNORuleURI(tenantUUID, info.batchNORuleUUID)};
+    }
+    retInfo.href=URIParser.batchNumberURI(tenantUUID, info.batchNORuleUUID, info.uuid);
+    return retInfo;
+}
+&nbsp;
+exports.generateListBatchNumbersRetInfo = function(tenantUUID, batchNORuleUUID, queryConditions, offset, total, info){
+    var expandStr = querystring.stringify(queryConditions);
+    if(expandStr != ''){
+        expandStr += '?';
+    }
+    var retInfo = {
+        'href': URIParser.batchNumberURI(tenantUUID, batchNORuleUUID),
+        'offset': offset,
+        'limit': info.length,
+        'size' : total,
+        'items': new Array()
+    };
+&nbsp;
+    var tmp = this;
+    info.forEach(function(element){
+        var oneItem = tmp.generateBatchNumbersRetInfo(tenantUUID, element);
+        retInfo.items.push(oneItem);
+    });
+&nbsp;
+    return retInfo;
+&nbsp;
+}
+&nbsp;
+exports.retBashProcessingInfo = function(items){
+    var retInfo = {
+        'href':  URIParser.bashProcessingURI(),
+        'items': items
+    };
+    return retInfo;
+};</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Thu Jul 14 2016 11:09:59 GMT+0800 (中国标准时间)
+</div>
+</div>
+<script src="../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../sorter.js"></script>
+</body>
+</html>

@@ -1,0 +1,644 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for SIMCardComponent\proxy\groupMembershipOperator.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../index.html">all files</a> / <a href="index.html">SIMCardComponent/proxy/</a> groupMembershipOperator.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">81.91% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>77/94</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">59.62% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>31/52</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">90.91% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>10/11</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">81.91% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>77/94</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line high'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">12×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">12×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">12×</span>
+<span class="cline-any cline-yes">12×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">12×</span>
+<span class="cline-any cline-yes">12×</span>
+<span class="cline-any cline-yes">12×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">12×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">12×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
+ * Created by Administrator on 2016/5/31.
+ */
+"use strict";
+var common = require('../controllers/common');
+var moment = require('moment');
+var utils = require('../common/utils');
+var groupMembershipModel = require('../models/groupMembershipDB');
+&nbsp;
+function convert2DBInfo(info, isCreate) {
+    var dateTime = moment(new Date()).format('YYYY-MM-DD HH:mm:ss');
+    var uuid = utils.createUUID();
+    var groupUUID, simCardUUID;
+    <span class="missing-if-branch" title="else path not taken" >E</span>if(info.group &amp;&amp; info.group.href){
+        <span class="missing-if-branch" title="else path not taken" >E</span>if(info.group.href.indexOf('groups/') &gt; -1){
+            groupUUID = utils.getUUIDInHref(info.group.href, 'groups/');
+        }
+    }
+    <span class="missing-if-branch" title="else path not taken" >E</span>if(info.simCard &amp;&amp; info.simCard.href){
+        <span class="missing-if-branch" title="else path not taken" >E</span>if(info.simCard.href.indexOf('simCards/') &gt; -1){
+            simCardUUID = utils.getUUIDInHref(info.simCard.href, 'simCards/');
+        }
+    }
+    var dbInfo = {
+        'uuid': utils.ifReturnStr(info.uuid, uuid),
+        'simCardUUID': utils.ifReturnStr(simCardUUID),
+        'groupUUID': utils.ifReturnStr(groupUUID),
+        'tenantUUID' : utils.ifReturnStr(info.tenantUUID),
+        'modifiedAt': dateTime
+    };
+    <span class="missing-if-branch" title="else path not taken" >E</span>if(isCreate) {
+        dbInfo.createAt = dateTime;
+    }
+&nbsp;
+    return dbInfo;
+}
+&nbsp;
+function convert2LogicInfo(dbInfo) {
+    var info = {
+        'uuid': utils.ifReturnStr(dbInfo.uuid),
+        'simCardUUID': utils.ifReturnStr(dbInfo.simCardUUID),
+        'groupUUID': utils.ifReturnStr(dbInfo.groupUUID),
+        'tenantUUID' : utils.ifReturnStr(dbInfo.tenantUUID),
+        'createAt' : utils.ifReturnStr(dbInfo.createAt),
+        'modifiedAt': utils.ifReturnStr(dbInfo.modifiedAt)
+    };
+    return info;
+}
+&nbsp;
+function generateQueryCondition(queryCondition) {
+    var size = 0;
+    for (var conditionItem in queryCondition) {
+        if (conditionItem == 'offset' || conditionItem == 'limit'  || conditionItem == 'orderBy' || conditionItem == 'expand' ){
+            continue;
+        }
+        ++size;
+    }
+    var queryStr = '';
+    var i = 0;
+    for (var condition in queryCondition) {
+        var isContinue = false;
+        switch (condition) {
+<span class="branch-0 cbranch-no" title="branch not covered" >            case 'uuid' :<span class="branch-1 cbranch-no" title="branch not covered" >c</span>ase 'status':<span class="branch-2 cbranch-no" title="branch not covered" >c</span>ase 'tenantUUID':<span class="branch-3 cbranch-no" title="branch not covered" >c</span>ase 'deviceUUID':c</span>ase 'groupUUID':case 'type':
+            queryStr += condition + '= \'' + queryCondition[condition] + '\'';
+            break;
+<span class="branch-6 cbranch-no" title="branch not covered" >            case 'groupURL':</span>
+<span class="cstat-no" title="statement not covered" >                var groupUUID;</span>
+<span class="cstat-no" title="statement not covered" >                if(queryCondition[condition].indexOf('groups/')&gt;-1){</span>
+<span class="cstat-no" title="statement not covered" >                    groupUUID=utils.getUUIDInHref(queryCondition[condition].href, 'groups/');</span>
+                }
+<span class="cstat-no" title="statement not covered" >                queryStr += 'groupUUID = \'' +groupUUID+ '\'';</span>
+<span class="cstat-no" title="statement not covered" >                break;</span>
+<span class="branch-7 cbranch-no" title="branch not covered" >            case 'deviceURL':</span>
+<span class="cstat-no" title="statement not covered" >                var deviceUUID;</span>
+<span class="cstat-no" title="statement not covered" >                if(queryCondition[condition].indexOf('devices/')&gt;-1){</span>
+<span class="cstat-no" title="statement not covered" >                    deviceUUID=utils.getUUIDInHref(queryCondition[condition].href, 'devices/');</span>
+                }
+<span class="cstat-no" title="statement not covered" >                queryStr += 'deviceUUID = \'' +deviceUUID+ '\'';</span>
+<span class="cstat-no" title="statement not covered" >                break;</span>
+            case 'expand':case 'offset':case'limit':case 'orderBy':
+            isContinue = true;
+            break;
+        }
+        if (isContinue){
+            continue;
+        }
+        ++i;
+        <span class="missing-if-branch" title="if path not taken" >I</span>if (i &lt; size) {
+<span class="cstat-no" title="statement not covered" >            queryStr += ' and ';</span>
+        }
+    }
+    //避免已经逻辑删除的数据被检索
+    if(i != 0){
+        queryStr += 'and deleteFlag != \'' + common.m_logicDeleteFlag + '\'';
+    }else{
+        queryStr += 'deleteFlag != \'' + common.m_logicDeleteFlag + '\'';
+    }
+    return queryStr;
+}
+&nbsp;
+exports.createGroupMembership = function(info) {
+    var data = convert2DBInfo(info, true);
+    return Promise.resolve(groupMembershipModel.createGroupMembership(data)).then(() =&gt; {
+        return convert2LogicInfo(data);
+    });
+    //return new Promise(function (resolve) {
+    //    groupMembershipModel.createGroupMembership(data)
+    //        .then(function () {
+    //            resolve(convert2LogicInfo(data));
+    //        })
+    //});
+};
+&nbsp;
+exports.updateGroupMembership=<span class="fstat-no" title="function not covered" >function(info){</span>
+<span class="cstat-no" title="statement not covered" >    var data=convert2DBInfo(info);</span>
+<span class="cstat-no" title="statement not covered" >    return Promise.resolve( groupMembershipModel.updateGroupMembership(data)).then(() =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >        return convert2LogicInfo(data);</span>
+    });
+}
+&nbsp;
+exports.deleteGroupMembership=function(uuid){
+    //只逻辑删除
+    return  Promise.resolve(groupMembershipModel.delGroupMembership(uuid, 'deleteFlag', common.m_logicDeleteFlag));
+}
+&nbsp;
+exports.retrieveGroupMembership = function(tenantUUID, uuid){
+    return groupMembershipModel.retrieveGroupMembership(uuid, tenantUUID).then((results) =&gt; {
+        var infos = [];
+        for (var i = 0; i &lt; results.length; ++i) {
+            infos.push(convert2LogicInfo(results[i]));
+        }
+        return infos;
+    });
+    //return new Promise(function (resolve) {
+    //    groupMembershipModel.retrieveGroupMembership(uuid, tenantUUID)
+    //        .then(function (results) {
+    //            var infos = [];
+    //            for (var i = 0; i &lt; results.length; ++i) {
+    //                infos.push(convert2LogicInfo(results[i]));
+    //            }
+    //            resolve(infos);
+    //        })
+    //});
+};
+&nbsp;
+exports.getCount = function(tenantUUID, queryConditions, groupUUID){
+    var queryStr = generateQueryCondition(queryConditions);
+    <span class="missing-if-branch" title="else path not taken" >E</span>if(queryStr!=''){
+        queryStr +=' and tenantUUID =\'' + tenantUUID + '\'';
+    }
+    <span class="missing-if-branch" title="if path not taken" >I</span>if(groupUUID){
+<span class="cstat-no" title="statement not covered" >        queryStr +=' and groupUUID =\'' + groupUUID + '\'';</span>
+    }
+    return Promise.resolve(groupMembershipModel.getCount(queryStr))
+        .then(function (results) {
+            return results[0].count;
+        });
+};
+&nbsp;
+exports.queryGroupMemberships = function(tenantUUID, queryConditions, offset, limit, groupUUID, simCardUUID){
+&nbsp;
+    var queryStr = generateQueryCondition(queryConditions);
+    <span class="missing-if-branch" title="else path not taken" >E</span>if(queryStr!=''){
+        queryStr +=' and tenantUUID =\'' + tenantUUID + '\'';
+    }
+    <span class="missing-if-branch" title="if path not taken" >I</span>if(groupUUID){
+<span class="cstat-no" title="statement not covered" >        queryStr +=' and groupUUID =\'' + groupUUID + '\'';</span>
+    }
+    <span class="missing-if-branch" title="if path not taken" >I</span>if(simCardUUID){
+<span class="cstat-no" title="statement not covered" >        queryStr +=' and simCardUUID =\'' + simCardUUID + '\'';</span>
+    }
+    return groupMembershipModel.queryGroupMemberships(queryStr, offset, limit, queryConditions.orderBy)
+        .then((results) =&gt; {
+            var infos = [];
+            for (var i = 0; i &lt; results.length; ++i) {
+                infos.push(convert2LogicInfo(results[i]));
+            }
+            return infos;
+        });
+    //return new Promise(function (resolve) {
+    //    groupMembershipModel.queryGroupMemberships(queryStr, offset, limit, queryConditions.orderBy)
+    //        .then(function (results) {
+    //            var infos = [];
+    //            for (var i = 0; i &lt; results.length; ++i) {
+    //                infos.push(convert2LogicInfo(results[i]));
+    //            }
+    //            resolve(infos);
+    //        })
+    //});
+};
+&nbsp;
+exports.queryBy = function(retRaw, queryStr){
+    return Promise.resolve(groupMembershipModel.queryBy(retRaw, queryStr));
+};</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Thu Jul 14 2016 11:09:59 GMT+0800 (中国标准时间)
+</div>
+</div>
+<script src="../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../sorter.js"></script>
+</body>
+</html>

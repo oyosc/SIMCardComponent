@@ -1,0 +1,2738 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for SIMCardComponent\controllers\batchNumbers.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../index.html">all files</a> / <a href="index.html">SIMCardComponent/controllers/</a> batchNumbers.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">41.19% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>215/522</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">23.19% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>48/207</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">39.39% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>13/33</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">41.19% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>215/522</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381
+382
+383
+384
+385
+386
+387
+388
+389
+390
+391
+392
+393
+394
+395
+396
+397
+398
+399
+400
+401
+402
+403
+404
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415
+416
+417
+418
+419
+420
+421
+422
+423
+424
+425
+426
+427
+428
+429
+430
+431
+432
+433
+434
+435
+436
+437
+438
+439
+440
+441
+442
+443
+444
+445
+446
+447
+448
+449
+450
+451
+452
+453
+454
+455
+456
+457
+458
+459
+460
+461
+462
+463
+464
+465
+466
+467
+468
+469
+470
+471
+472
+473
+474
+475
+476
+477
+478
+479
+480
+481
+482
+483
+484
+485
+486
+487
+488
+489
+490
+491
+492
+493
+494
+495
+496
+497
+498
+499
+500
+501
+502
+503
+504
+505
+506
+507
+508
+509
+510
+511
+512
+513
+514
+515
+516
+517
+518
+519
+520
+521
+522
+523
+524
+525
+526
+527
+528
+529
+530
+531
+532
+533
+534
+535
+536
+537
+538
+539
+540
+541
+542
+543
+544
+545
+546
+547
+548
+549
+550
+551
+552
+553
+554
+555
+556
+557
+558
+559
+560
+561
+562
+563
+564
+565
+566
+567
+568
+569
+570
+571
+572
+573
+574
+575
+576
+577
+578
+579
+580
+581
+582
+583
+584
+585
+586
+587
+588
+589
+590
+591
+592
+593
+594
+595
+596
+597
+598
+599
+600
+601
+602
+603
+604
+605
+606
+607
+608
+609
+610
+611
+612
+613
+614
+615
+616
+617
+618
+619
+620
+621
+622
+623
+624
+625
+626
+627
+628
+629
+630
+631
+632
+633
+634
+635
+636
+637
+638
+639
+640
+641
+642
+643
+644
+645
+646
+647
+648
+649
+650
+651
+652
+653
+654
+655
+656
+657
+658
+659
+660
+661
+662
+663
+664
+665
+666
+667
+668
+669
+670
+671
+672
+673
+674
+675
+676
+677
+678
+679
+680
+681
+682
+683
+684
+685
+686
+687
+688
+689
+690
+691
+692
+693
+694
+695
+696
+697
+698
+699
+700
+701
+702
+703
+704
+705
+706
+707
+708
+709
+710
+711
+712
+713
+714
+715
+716
+717
+718
+719
+720
+721
+722
+723
+724
+725
+726
+727
+728
+729
+730
+731
+732
+733
+734
+735
+736
+737
+738
+739
+740
+741
+742
+743
+744
+745
+746
+747
+748
+749
+750
+751
+752
+753
+754
+755
+756
+757
+758
+759
+760
+761
+762
+763
+764
+765
+766
+767
+768
+769
+770
+771
+772
+773
+774
+775
+776
+777
+778
+779
+780
+781
+782
+783
+784
+785
+786
+787
+788
+789
+790
+791
+792
+793
+794
+795
+796
+797
+798
+799
+800
+801
+802
+803
+804
+805
+806
+807
+808
+809
+810
+811
+812
+813
+814
+815
+816
+817
+818
+819
+820
+821
+822
+823
+824
+825
+826
+827
+828
+829
+830
+831
+832
+833
+834
+835
+836
+837
+838
+839
+840
+841
+842
+843
+844
+845
+846
+847
+848
+849
+850
+851
+852
+853
+854
+855
+856
+857
+858
+859
+860
+861
+862
+863
+864
+865
+866
+867
+868
+869
+870
+871
+872
+873
+874
+875
+876
+877
+878
+879
+880
+881
+882
+883
+884
+885
+886
+887
+888
+889
+890
+891
+892</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">13×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
+ * Created by Administrator on 2016/5/19.
+ */
+&nbsp;
+/**
+ * @apiDefine BatchNumber BatchNumber
+ *
+ * 批次号(BatchNumber)资源是SIM卡批次号
+ *
+ */
+var common = require('./common');
+var contentType = require('./common').retContentType;
+var returnResources = require('./returnResources');
+var utils= require('../common/utils');
+var config = require("../config/config.js");
+var batchNumbersProxy = require("../proxy/batchNumberOperator");
+var moment = require('moment');
+var serialNumbersModel = require("../models/serialNumberDB");
+var batchNORuleProxy = require("../proxy/batchNORuleOperator");
+var tenantProxy = require("../proxy/tenantOperator");
+var eventProxy = require('eventproxy');
+var MessageProducer = require('./messageProducerCentre').MessageProducer;
+var merchandiseComponentProducer = new MessageProducer();
+var Message = require('../common/message').Message;
+var MessageId = require('../common/message').MessageId;
+var config = require('../config/config');
+&nbsp;
+function isTenantExist(tenantUUID){
+    var queryStr = 'uuid=\'' + tenantUUID + '\'';
+    return Promise.resolve(tenantProxy.queryBy('uuid', queryStr))
+        .then((results) =&gt;{
+            var judge = common.isOnly(null, results.length);
+            <span class="missing-if-branch" title="else path not taken" >E</span>if(judge.is) {
+                return results[0];
+            }
+<span class="cstat-no" title="statement not covered" >            if(judge.flag == 1) {</span>
+<span class="cstat-no" title="statement not covered" >                judge.error.description = 'Could not find the resources you want to query tenant.the query string: ' + queryStr;</span>
+            } else <span class="cstat-no" title="statement not covered" >if(judge.flag == 2){</span>
+<span class="cstat-no" title="statement not covered" >                judge.error.description = 'Find much resource when query tenant. the query string: ' + queryStr;</span>
+            }
+<span class="cstat-no" title="statement not covered" >            return judge;</span>
+        });
+}
+&nbsp;
+var isExist = (name, uuid) =&gt; {
+    var queryStr ;
+    <span class="missing-if-branch" title="if path not taken" >I</span>if(name) {
+<span class="cstat-no" title="statement not covered" >        queryStr = 'name=\''+ name + '\'';</span>
+    } else{
+        queryStr = 'uuid=\''+ uuid + '\'';
+    }
+    return new Promise((resolve) =&gt; {
+        batchNumbersProxy.queryBy(null, queryStr).then((results) =&gt; {
+            var judge = common.isOnly(null, results.length);
+            <span class="missing-if-branch" title="else path not taken" >E</span>if(judge.is) {
+                resolve(results[0]);
+            }
+            var error = judge.error;
+            <span class="missing-if-branch" title="if path not taken" >I</span>if(judge.flag == 1) {
+<span class="cstat-no" title="statement not covered" >                error.description = 'Could not find the resources you want to query Organization.the query string: ' + queryStr;</span>
+            } else <span class="missing-if-branch" title="if path not taken" >I</span>if(judge.flag == 2) {
+<span class="cstat-no" title="statement not covered" >                error.description = 'Find much resource when query Organization. the query string: ' + queryStr;</span>
+            }
+            resolve( error);
+        });
+    })
+}
+&nbsp;
+var isValidQueryCondition = (queryCondition) =&gt; {
+    for(var item in queryCondition) {
+        switch(item) {
+<span class="branch-0 cbranch-no" title="branch not covered" >            case 'uuid' : <span class="branch-1 cbranch-no" title="branch not covered" ></span>case 'name' :<span class="branch-2 cbranch-no" title="branch not covered" >c</span>ase 'status':</span>
+<span class="branch-3 cbranch-no" title="branch not covered" >            case 'createAt' : </span> <span class="branch-4 cbranch-no" title="branch not covered" >case 'modifiedAt' :</span>
+            case 'expand':case 'offset': case 'limit':
+            break;
+<span class="branch-8 cbranch-no" title="branch not covered" >            default:</span>
+<span class="cstat-no" title="statement not covered" >                return false;</span>
+        }
+    }
+    return true;
+}
+&nbsp;
+var getBatchNORule = (batchNORuleUUID, tenantUUID) =&gt;{
+    return Promise.resolve(batchNORuleProxy.retrieveBatchNoRule(tenantUUID, batchNORuleUUID));
+}
+&nbsp;
+var getTenant = (tenantUUID) =&gt; {
+    return Promise.resolve(tenantProxy.retrieveTenant(tenantUUID));
+}
+&nbsp;
+function getExpandStr(expandStr, data,  tenantUUID){
+    var result = new Array;
+    var i = 0;
+    var expandArray = expandStr.split(';');
+    for(var x in expandArray){
+        var retExpand = common.getExpand(expandArray[x]);
+        if(retExpand[0] == 'batchNORule'){
+            result[i] = getBatchNORule(data.batchNORuleUUID, tenantUUID).then(function(result){
+                <span class="missing-if-branch" title="if path not taken" >I</span>if(result.length == 0){
+<span class="cstat-no" title="statement not covered" >                    return result;</span>
+                }
+                result[0].tag = 'batchNORule';
+                return result[0];
+            });
+            i++;
+        }
+        if(retExpand[0] == 'tenant'){
+            result[i] = getBatchNORule(data.batchNORuleUUID, tenantUUID).then(function(batchNORuleResult){
+                <span class="missing-if-branch" title="if path not taken" >I</span>if(batchNORuleResult.length == 0){
+<span class="cstat-no" title="statement not covered" >                    return batchNORuleResult;</span>
+                }
+                return getTenant(batchNORuleResult[0].tenantUUID);
+            }).then(function(result){
+                <span class="missing-if-branch" title="if path not taken" >I</span>if(result.length == 0){
+<span class="cstat-no" title="statement not covered" >                    return result;</span>
+                }
+                result[0].tag = 'tenant';
+                return result[0];
+            });
+            i++;
+        }
+    }
+    return Promise.all(result);
+}
+&nbsp;
+/**
+ * @api {post} /:version/tenants/:tenantUUID/batchNORules/:batchNORuleUUID/batchNumbers CreateBatchNumber
+ * @apiName CreateBatchNumber
+ * @apiVersion 1.0.0
+ * @apiGroup BatchNumber
+ * @apiDescription  创建一个批次号
+ *
+ * @apiParam (input) {string} batchNumber 批次号
+ * @apiParam (output) {string} createAt 创建时间，时间格式为（YYYY-MM-DD hh:MM:SS）
+ * @apiParam (output) {string} modifiedAt 最后更新时间，默认下创建时间一样，时间格式为（YYYY-MM-DD hh:MM:SS）
+ * @apiParam (output) {url} batchNORule批次号规则URL链接，见[BatchNORule](#api-BatchNORule)资源
+ * @apiParam (output) {url} tenant 该组的租赁用户URL链接，见[Tenant](#api-Tenant)资源
+ *
+ * @apiParamExample  Example Request
+ * POST:  127.0.0.1:3000/api/v1/tenants/P0F5iYzwSRzjiIfLs1Jfo9/batchNORules/57YZCqrNgrzcIGYs1PfP4F/batchNumbers
+ * Content-Type: application/json;charset=UTF-8
+ * {
+ * }
+ *
+ * @apiSuccessExample Example Response
+ * HTTP/1.1 201 Created
+ * Location: https://127.0.0.1:3000/api/v1/tenants/P0F5iYzwSRzjiIfLs1Jfo9/batchNORules/57YZCqrNgrzcIGYs1PfP4F/batchNumbers/57YZCqrNgrzcIGYs1PfP4F
+ * Content-Type: application/json;charset=UTF-8;
+ * {
+ *   "href":"https://127.0.0.1:3000/api/v1/tenants/P0F5iYzwSRzjiIfLs1Jfo9/batchNORules/57YZCqrNgrzcIGYs1PfP4F/batchNumbers/57YZCqrNgrzcIGYs1PfP4F",
+ *   "batchNumber": "2015091007",
+ *   "createAt" : "2016-01-10 12:30:00",
+ *   "modifiedAt" : "2016-01-10 12:30:00",
+ *   "batchNORule" : {
+ *      "href" : "https://127.0.0.1:3000/api/v1/tenants/P0F5iYzwSRzjiIfLs1Jfo9/batchNORules/57YZCqrNgrzcIGYs1PfP4F"
+ *   },
+ *   "tenant" : {
+ *      "href" : "https://127.0.0.1:3000/api/v1/tenants/P0F5iYzwSRzjiIfLs1Jfo9"
+ *   }
+ * }
+ */
+var createBatchNumberV1 = (req, res) =&gt; {
+    var info = req.body;
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (!utils.checkUUID(req.params.tenantUUID)) {
+<span class="cstat-no" title="statement not covered" >        var error;</span>
+<span class="cstat-no" title="statement not covered" >        error.status = 400;</span>
+<span class="cstat-no" title="statement not covered" >        error.description = '输入参数有误';</span>
+<span class="cstat-no" title="statement not covered" >        return common.errorReturn(res, error.status, error);</span>
+    }
+    var  tenantUUID = req.params.tenantUUID;
+    info.batchNORuleUUID = req.params.batchNORuleUUID;
+    var dateFormat = moment(new Date()).format('YYYY-MM-DD 00:00:00');
+    var queryStr = 'createAt= \'' + dateFormat + '\'';
+    var getBatchNORules = batchNumbersProxy.getBatchNORules(info.batchNORuleUUID);
+    var dateJudge = serialNumbersModel.getSerialNumber(queryStr);
+    function createBatchNumber(info) {
+        return Promise.resolve(batchNumbersProxy.createBatchNumber(info));
+    }
+    var ep = new eventProxy();
+    ep.on('send_Message', function(bodyDataJson){
+        Promise.resolve(isTenantExist(tenantUUID)).then(function(result){
+            <span class="missing-if-branch" title="if path not taken" >I</span>if (config.is_sendMessage) {
+<span class="cstat-no" title="statement not covered" >                var message = new Message(MessageId.Create_Service_Success, bodyDataJson);</span>
+<span class="cstat-no" title="statement not covered" >                merchandiseComponentProducer.sendMessage(result.topic, message, <span class="fstat-no" title="function not covered" >function(error, data){</span></span>
+<span class="cstat-no" title="statement not covered" >                    console.log(error);</span>
+                });
+            }
+        });
+    });
+    Promise.all([dateJudge, getBatchNORules]).then((result) =&gt;{
+        <span class="missing-if-branch" title="if path not taken" >I</span>if(!result[1]){
+<span class="cstat-no" title="statement not covered" >            throw result[1];</span>
+        }else {
+            var batchRule = result[1][0].rule;
+            var complementCode = result[1][0].complementCode;
+            var yChars = '', fChars = '';
+            var batchArray = batchRule.split('');
+            for (var i = 0; i &lt; batchArray.length; i++) {
+                switch (batchArray[i]) {
+                    case 'Y':
+                        yChars += 'Y';
+                        break;
+                    case 'F':
+                        fChars += 'F';
+                        break;
+<span class="branch-2 cbranch-no" title="branch not covered" >                    case '0':</span>
+<span class="cstat-no" title="statement not covered" >                        fChars += '0';</span>
+<span class="cstat-no" title="statement not covered" >                        break;</span>
+<span class="cstat-no" title="statement not covered" >                        break;</span>
+                }
+            }
+            var judgeSerial;
+            <span class="missing-if-branch" title="if path not taken" >I</span>if (result[0].length&gt; 0) {
+<span class="cstat-no" title="statement not covered" >                if (result[0][0].batchNumber &lt; parseInt(fChars, 16)) {</span>
+<span class="cstat-no" title="statement not covered" >                    judgeSerial = serialNumbersModel.updateSerialNumber(result[0][0].createAt, 'batchNumber', (result[0][0].batchNumber + 1));</span>
+                } else {
+<span class="cstat-no" title="statement not covered" >                    return false;</span>
+                }
+            } else {
+                var infoSerial = {
+                    'batchNumber': 1,
+                    'createAt': dateFormat
+                }
+                judgeSerial = serialNumbersModel.createSerialNumber(infoSerial);
+            }
+            return Promise.all([judgeSerial, info, fChars, batchRule, complementCode, yChars]);
+        }
+    }).then((allResult) =&gt;{
+        <span class="missing-if-branch" title="if path not taken" >I</span>if(allResult[0].length&lt;1){
+<span class="cstat-no" title="statement not covered" >            throw allResult[0]</span>
+        }else{
+            var batchRule = allResult[3];
+            var fChars = allResult[2];
+            var complementCode = allResult[4];
+            var year = new Date().getFullYear().toString();
+            var yChars = allResult[5];
+            var serialLength;
+            var batchRuleByChange;
+            return  dateJudge.then((dateResult) =&gt; {
+                switch (yChars.length){
+<span class="branch-0 cbranch-no" title="branch not covered" >                    case 1:</span>
+<span class="cstat-no" title="statement not covered" >                        batchRuleByChange = batchRule.replace(/Y/, year.substr(4,1));</span>
+<span class="cstat-no" title="statement not covered" >                        break;</span>
+<span class="branch-1 cbranch-no" title="branch not covered" >                    case 2:</span>
+<span class="cstat-no" title="statement not covered" >                        batchRuleByChange =  batchRule.replace(/YY/,year.substr(3,2));</span>
+<span class="cstat-no" title="statement not covered" >                        break;</span>
+                    case 4:
+                        batchRuleByChange = batchRule.replace(/YYYY/, 2016);
+                        break
+<span class="cstat-no" title="statement not covered" >                        break;</span>
+                }
+                var reg = new RegExp(fChars);
+                <span class="missing-if-branch" title="else path not taken" >E</span>if(fChars.indexOf('F')&gt;=0){
+                    <span class="missing-if-branch" title="else path not taken" >E</span>if(dateResult[0].batchNumber.toString(16).length &lt; fChars.length) {
+                        serialLength = fChars.length - dateResult[0].batchNumber.toString(16).length;
+                        for (var i = 0; i &lt; fChars.length - 1; i++) {
+                            complementCode += complementCode;
+                        }
+                        batchRuleByChange = batchRuleByChange.replace(reg, complementCode.concat(dateResult[0].batchNumber));
+                    }else <span class="cstat-no" title="statement not covered" >if(dateResult[0].batchNumber.toString(16).length == fChars.length){</span>
+<span class="cstat-no" title="statement not covered" >                        batchRuleByChange = batchRuleByChange.replace(reg, complementCode.concat(dateResult[0].batchNumber));</span>
+                    }else{
+<span class="cstat-no" title="statement not covered" >                        return false;</span>
+                    }
+                }else  <span class="cstat-no" title="statement not covered" >if(fChars.indexOf('0')&gt;=0){</span>
+<span class="cstat-no" title="statement not covered" >                    if(dateResult[0].batchNumber.length &lt; fChars.length){</span>
+<span class="cstat-no" title="statement not covered" >                        serialLength = fChars.length - dateResult[0].batchNumber.length;</span>
+<span class="cstat-no" title="statement not covered" >                        for(var i =0;i&lt;serialLength; i++){</span>
+<span class="cstat-no" title="statement not covered" >                            complementCode += complementCode;</span>
+                        }
+<span class="cstat-no" title="statement not covered" >                        batchRuleByChange = batchRuleByChange.replace(reg, complementCode.concat(dateResult[0].batchNumber));</span>
+                    }else <span class="cstat-no" title="statement not covered" >if(dateResult[0].batchNumber.toString(16).length == fChars.length){</span>
+<span class="cstat-no" title="statement not covered" >                        batchRuleByChange = batchRuleByChange.replace(reg, complementCode.concat(dateResult[0].batchNumber));</span>
+                    }else{
+<span class="cstat-no" title="statement not covered" >                        return false;</span>
+                    }
+                }else{
+<span class="cstat-no" title="statement not covered" >                    return false;</span>
+                }
+                var month = new Date().getMonth() + 1;
+                var week = new Date().getDay();
+                var monthChange = (month&lt;10?'0':<span class="branch-1 cbranch-no" title="branch not covered" >'')</span> +month;
+                var weekChange = '0' + week;
+                batchRuleByChange = batchRuleByChange.replace(/WW/, weekChange);
+                batchRuleByChange = batchRuleByChange.replace(/MM/, monthChange);
+                batchRuleByChange = batchRuleByChange.replace(/DD/, new Date().getDate());
+                info.batchNumber = batchRuleByChange;
+                return createBatchNumber(info);
+            });
+        }
+    }).then((Result)=&gt; {
+        var bodyDataJson = returnResources.generateBatchNumbersRetInfo(tenantUUID, Result[0]);
+        ep.emit('send_Message', bodyDataJson);
+        res.writeHead(201, {'Content-Type': common.retContentType, 'Location': bodyDataJson.href});
+        res.write(JSON.stringify(bodyDataJson));
+        res.end();
+    }).catch((err) =&gt; {
+<span class="cstat-no" title="statement not covered" >        if(!err.flag){</span>
+<span class="cstat-no" title="statement not covered" >            err = common.isDBError(err);</span>
+        }
+<span class="cstat-no" title="statement not covered" >        common.errorReturn(res, err.status, err);</span>
+<span class="cstat-no" title="statement not covered" >        return;</span>
+    });
+}
+&nbsp;
+exports.createBatchNumber = function(req, res, next){
+    var version = req.params.version;
+    <span class="missing-if-branch" title="else path not taken" >E</span>if(version == common.VERSION100){
+        createBatchNumberV1(req, res);
+        <span class="missing-if-branch" title="if path not taken" >I</span>if(config.record == true){
+<span class="cstat-no" title="statement not covered" >            next();</span>
+        }
+    }
+}
+&nbsp;
+/**
+ * @api {get} /:version/tenants/:tenantUUID/batchNORules/:batchNORuleUUID/batchNumbers/:batchNumberUUID RetrieveBatchNumber
+ * @apiName RetrieveBatchNumber
+ * @apiVersion 1.0.0
+ * @apiGroup BatchNumber
+ * @apiDescription  获取指定批次号信息
+ * @apiParam {string} [expand] ?后面可以接查询字段expand,expand表示获取时同时返回对应资源的信息。expand的值可以是batchNORule、tenant或他们的组合，中间用','号隔开
+ *
+ * @apiParam (input) {string} batchNumber 批次号
+ * @apiParam (output) {string} createAt 创建时间，时间格式为（YYYY-MM-DD hh:MM:SS）
+ * @apiParam (output) {string} modifiedAt 最后更新时间，默认下创建时间一样，时间格式为（YYYY-MM-DD hh:MM:SS）
+ * @apiParam (output) {url} batchNORule批次号规则URL链接，见[BatchNORule](#api-BatchNORule)资源
+ * @apiParam (output) {url} tenant 该组的租赁用户URL链接，见[Tenant](#api-Tenant)资源
+ *
+ * @apiParamExample Example Request
+ * GET https://127.0.0.1:3000/api/v1/tenants/P0F5iYzwSRzjiIfLs1Jfo9/batchNORules/57YZCqrNgrzcIGYs1PfP4F/batchNumbers/57YZCqrNgrzcIGYs1PfP4F
+ * @apiSuccessExample Example Response
+ * HTTP/1.1 200 OK
+ * Content-Type: application/json;charset=UTF-8;
+ *
+ * {
+ *   "href":"https://127.0.0.1:3000/api/v1/tenants/P0F5iYzwSRzjiIfLs1Jfo9/batchNORules/57YZCqrNgrzcIGYs1PfP4F/batchNumbers/57YZCqrNgrzcIGYs1PfP4F",
+ *   "batchNumber": "2015091007",
+ *   "createAt" : "2016-01-10 12:30:00",
+ *   "modifiedAt" : "2016-01-10 12:30:00",
+ *   "batchNORule" : {
+ *      "href" : "https://127.0.0.1:3000/api/v1/tenants/P0F5iYzwSRzjiIfLs1Jfo9/batchNORules/57YZCqrNgrzcIGYs1PfP4F"
+ *   },
+ *   "tenant" : {
+ *      "href" : "https://127.0.0.1:3000/api/v1/tenants/P0F5iYzwSRzjiIfLs1Jfo9"
+ *   }
+ * }
+ */
+var retrieveBatchNumberV1= (req, res) =&gt; {
+    var info = req.body;
+    info.uuid = req.params.batchNumberUUID;
+    var getExist = isExist(null, info.uuid);
+    var expandStr=req.query.expand;
+    <span class="missing-if-branch" title="if path not taken" >I</span>if ( !utils.checkUUID(req.params.batchNumberUUID)) {
+<span class="cstat-no" title="statement not covered" >        var error;</span>
+<span class="cstat-no" title="statement not covered" >        error.status=400;</span>
+<span class="cstat-no" title="statement not covered" >        error.description='输入参数有误';</span>
+<span class="cstat-no" title="statement not covered" >        return common.errorReturn(res, error.status, error);</span>
+    }
+    info.tenantUUID = req.params.tenantUUID;
+    var tenantUUID = info.tenantUUID;
+    const retrieveBatchNumber = (uuid ) =&gt; {
+        return Promise.resolve(batchNumbersProxy.retrieveBatchNumber(uuid ));
+    }
+    retrieveBatchNumber(info.uuid).then((results) =&gt; {
+        var judge = common.isOnly(null, results.length);
+        <span class="missing-if-branch" title="else path not taken" >E</span>if(judge.is) {
+            var bodyDataJson = returnResources.generateBatchNumbersRetInfo(tenantUUID, results[0]);
+            if(!expandStr){
+                return bodyDataJson;
+            }
+            return getExpandStr(expandStr, results[0], tenantUUID).then(function(result){
+                for(var x in result){
+                    if(result[x].tag =='tenant'){
+                        var resultTenant = returnResources.generateTenantRetInfo( result[x])
+                        bodyDataJson['tenants'] =resultTenant;
+                    }
+                    if(result[x].tag =='batchNORule'){
+                        var resultBatchNORule = returnResources.generateBatchNORuleRetInfo(result[x]);
+                        bodyDataJson['batchNORules'] =resultBatchNORule;
+                    }
+                }
+                return bodyDataJson;
+            });
+        }
+<span class="cstat-no" title="statement not covered" >        var error = judge.error;</span>
+<span class="cstat-no" title="statement not covered" >        if(judge.flag == 1) {</span>
+<span class="cstat-no" title="statement not covered" >            error.description = 'Could not find the resources you want to retrieve batchNumber.the uuid: ' + info.uuid;</span>
+        } else <span class="cstat-no" title="statement not covered" >if(judge.flag == 2) {</span>
+<span class="cstat-no" title="statement not covered" >            error.description = 'Find much resource when retrieve batchNumber. the uuid: ' + info.uuid;</span>
+        }
+    }).then((bodyInfo) =&gt; {
+        res.writeHead(200, {'Content-Type': contentType});
+        res.write(JSON.stringify(bodyInfo));
+        res.end();
+        return;
+    }).catch((err) =&gt; {
+<span class="cstat-no" title="statement not covered" >        if(!err.flag){</span>
+<span class="cstat-no" title="statement not covered" >            err = common.isDBError(err);</span>
+        }
+<span class="cstat-no" title="statement not covered" >        common.errorReturn(res, err.status, err);</span>
+<span class="cstat-no" title="statement not covered" >        return;</span>
+    });
+}
+&nbsp;
+exports.retrieveBatchNumber = (req, res, next) =&gt; {
+    var version = req.params.version;
+    <span class="missing-if-branch" title="else path not taken" >E</span>if(version == common.VERSION100){
+        retrieveBatchNumberV1(req, res);
+        <span class="missing-if-branch" title="if path not taken" >I</span>if(config.record == true){
+<span class="cstat-no" title="statement not covered" >            next();</span>
+        }
+    }
+}
+&nbsp;
+/**
+ * @api {delete} /:version/tenants/:tenantUUID/batchNORules/:batchNORuleUUID/batchNumbers/:batchNumberUUID DeleteBatchNumber
+ * @apiName DeleteBatchNumber
+ * @apiVersion 1.0.0
+ * @apiGroup BatchNumber
+ * @apiDescription  删除指定批次号信息
+ * @apiParamExample Example Request
+ * Delete 127.0.0.1:3000/api/v1/tenants/P0F5iYzwSRzjiIfLs1Jfo9/batchNORules/57YZCqrNgrzcIGYs1PfP4F/batchNumbers/57YZCqrNgrzcIGYs1PfP4F
+ *
+ * @apiSuccessExample Example Response
+ * HTTP/1.1 204 No Content
+ */
+var deleteBatchNumberV1=(req, res) =&gt; {
+<span class="cstat-no" title="statement not covered" >    if ( !utils.checkUUID(req.params.batchNumberUUID)) {</span>
+<span class="cstat-no" title="statement not covered" >        var error;</span>
+<span class="cstat-no" title="statement not covered" >        error.status=400;</span>
+<span class="cstat-no" title="statement not covered" >        error.description='输入参数有误';</span>
+<span class="cstat-no" title="statement not covered" >        return common.errorReturn(res, error.status, error);</span>
+    }
+<span class="cstat-no" title="statement not covered" >    var uuid= req.params.batchNumberUUID;</span>
+<span class="cstat-no" title="statement not covered" >    var getExist = isExist(null, uuid);</span>
+<span class="cstat-no" title="statement not covered" >    const deleteBatchNumber= (batchNumberUUID) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >        return Promise.resolve(batchNumbersProxy.deleteBatchNumber(batchNumberUUID));</span>
+    }
+<span class="cstat-no" title="statement not covered" >    var ep = new eventProxy();</span>
+<span class="cstat-no" title="statement not covered" >    ep.on('send_Message', <span class="fstat-no" title="function not covered" >function(){</span></span>
+<span class="cstat-no" title="statement not covered" >        Promise.resolve(isTenantExist(tenantUUID)).then(<span class="fstat-no" title="function not covered" >function(result){</span></span>
+<span class="cstat-no" title="statement not covered" >            if (config.is_sendMessage) {</span>
+<span class="cstat-no" title="statement not covered" >                var message = new Message(MessageId.Delete_Service_Success, 204);</span>
+<span class="cstat-no" title="statement not covered" >                merchandiseComponentProducer.sendMessage(result.topic, message, <span class="fstat-no" title="function not covered" >function(error, data){</span></span>
+<span class="cstat-no" title="statement not covered" >                    console.log(error);</span>
+                });
+            }
+        });
+    });
+<span class="cstat-no" title="statement not covered" >    getExist.then((results) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >        if(results.flag==4){</span>
+<span class="cstat-no" title="statement not covered" >            throw results;</span>
+        } else{
+<span class="cstat-no" title="statement not covered" >            return deleteBatchNumber(uuid);</span>
+        }
+    }).then(() =&gt; {
+<span class="cstat-no" title="statement not covered" >        ep.emit('send_Message');</span>
+<span class="cstat-no" title="statement not covered" >        res.writeHead(204, {'Content-Type' : contentType});</span>
+<span class="cstat-no" title="statement not covered" >        res.end();</span>
+    }).catch((err) =&gt; {
+<span class="cstat-no" title="statement not covered" >        if (!err.flag) {</span>
+<span class="cstat-no" title="statement not covered" >            err = common.isDBError(err);</span>
+        }
+<span class="cstat-no" title="statement not covered" >        common.errorReturn(res, err.status, err);</span>
+<span class="cstat-no" title="statement not covered" >        return;</span>
+    })
+}
+&nbsp;
+exports.deleteBatchNumber = (req, res, next) =&gt; {
+<span class="cstat-no" title="statement not covered" >    var version = req.params.version;</span>
+<span class="cstat-no" title="statement not covered" >    if(version == common.VERSION100){</span>
+<span class="cstat-no" title="statement not covered" >        deleteBatchNumberV1(req, res);</span>
+<span class="cstat-no" title="statement not covered" >        if(config.record == true){</span>
+<span class="cstat-no" title="statement not covered" >            next();</span>
+        }
+    }
+}
+&nbsp;
+/**
+ * @api {get} /:version/tenants/:tenantUUID/batchNORules/:batchNORuleUUID/batchNumbers ListBatchNumbers
+ * @apiName ListBatchNumbers
+ * @apiVersion 1.0.0
+ * @apiGroup BatchNumber
+ * @apiDescription  获取指定批次号信息列表
+ * @apiParam  {int} [offset]　偏移量
+ * @apiParam  {int} [limit] 获取条数
+ * @apiParam  {string} [orderBy] 排序，多个排序字段用','隔开。如orderBy=createAt,modifiedAt desc；desc与前面用空格隔开，desc表示降序，asc表示升序
+ * @apiParam {string} [expand] ?后面可以接查询字段expand,expand表示获取时同时返回对应资源的信息。expand的值可以是batchNORule、tenant或他们的组合，中间用','号隔开
+ *
+ * @apiParamExample Example Request
+ * GET https://127.0.0.1:3000/api/v1/tenants/P0F5iYzwSRzjiIfLs1Jfo9/batchNORules/57YZCqrNgrzcIGYs1PfP4F/batchNumbers
+ * @apiSuccessExample Example Response
+ * HTTP/1.1 200 OK
+ * Content-Type: application/json;charset=UTF-8;
+ *
+ * {
+ *      "href":"https://127.0.0.1:3000/api/v1/tenants/P0F5iYzwSRzjiIfLs1Jfo9/batchNORules/57YZCqrNgrzcIGYs1PfP4F/batchNumbers",
+ *      "offset":"0",
+ *      "limit":"25",
+ *      "size":100,
+ *      "items":[
+ *      {
+ *          "href":"https://127.0.0.1:3000/api/v1/tenants/P0F5iYzwSRzjiIfLs1Jfo9/batchNORules/57YZCqrNgrzcIGYs1PfP4F/batchNumbers/0000CqrNgrzcIGYs1PfP4F",
+ *          "bigClass": 1,
+ *          "subClass": 2,
+ *          ...
+ *      },
+ *      {
+ *          "href":"https://127.0.0.1:3000/api/v1/tenants/P0F5iYzwSRzjiIfLs1Jfo9/batchNORules/57YZCqrNgrzcIGYs1PfP4F/batchNumbers/0000CqrNgrzcIGYs1PfP4F",
+ *          "bigClass": 1,
+ *          "subClass": 2,
+ *          ... remaining BatchNumber name/value pairs ...
+ *      },
+ *      ... remaining items of BatchNumber ...
+ *    ]
+ *  }
+ */
+var listBatchNumbersV1 = (req, res) =&gt; {
+    var queryConditions = req.query;
+    var tenantUUID = req.params.tenantUUID;
+    var uuid= req.params.batchNumberUUID;
+    var batchNORuleUUID = req.params.batchNORuleUUID;
+    var expandStr=req.query.expand;
+    var offset = common.ifNotReturnNum(Number(req.query.offset), 0);
+    var limit = common.ifNotReturnNum(Number(req.query.limit), 25);
+    var judgeQuery = common.isValidQueryParams(req, isValidQueryCondition, null);
+    var listSuccess = Promise.resolve(batchNumbersProxy.queryBatchNumber(queryConditions, offset, limit));
+    var countSuccess = Promise.resolve(batchNumbersProxy.getCount(queryConditions));
+    Promise.all([judgeQuery, listSuccess, countSuccess]).then((result) =&gt; {
+        <span class="missing-if-branch" title="if path not taken" >I</span>if (result[0].is == false) {
+<span class="cstat-no" title="statement not covered" >            throw result[0];</span>
+        }
+        <span class="missing-if-branch" title="if path not taken" >I</span>if (result[1].length == 0) {
+<span class="cstat-no" title="statement not covered" >            result[1] = new Array();</span>
+        }
+        if(!expandStr){
+            return  returnResources.generateListBatchNumbersRetInfo(tenantUUID, batchNORuleUUID, queryConditions, offset, result[2][0], result[1]);
+        }
+        var listResult = new Array;
+        var item;
+        for ( item in result[1]) {
+            (function(item){
+                listResult[item] = getExpandStr(expandStr, result[1][item], tenantUUID).then(function (resultExpand) {
+                    for (var x in resultExpand) {
+                        if (resultExpand[x].tag == 'tenant') {
+                            result[1][item].tenants = returnResources.generateTenantRetInfo( resultExpand[x])
+                        }
+                        if (resultExpand[x].tag == 'batchNORule') {
+                            result[1][item].batchNORules = returnResources.generateBatchNORuleRetInfo(resultExpand[x])
+                        }
+                    }
+                    return result[1][item];
+                });
+            }(item));
+        }
+        return Promise.all(listResult).then(function(bodyResult){
+            return  returnResources.generateListBatchNumbersRetInfo(tenantUUID, batchNORuleUUID, queryConditions, offset, result[2], bodyResult);
+        });
+    }).then((bodyInfo) =&gt; {
+            res.writeHead(200, {'Content-Type': contentType});
+            res.write(JSON.stringify(bodyInfo));
+            res.end();
+            return;
+        }
+    ).catch( (err) =&gt; {
+<span class="cstat-no" title="statement not covered" >        if (!err.flag) {</span>
+<span class="cstat-no" title="statement not covered" >            err = common.isDBError(err);</span>
+        }
+<span class="cstat-no" title="statement not covered" >        common.errorReturn(res, err.error.status, err.error);</span>
+<span class="cstat-no" title="statement not covered" >        return;</span>
+    });
+}
+&nbsp;
+exports.listBatchNumbers = (req, res, next) =&gt; {
+    var version = req.params.version;
+    <span class="missing-if-branch" title="else path not taken" >E</span>if(version == common.VERSION100){
+        listBatchNumbersV1(req, res);
+        <span class="missing-if-branch" title="if path not taken" >I</span>if(config.record == true){
+<span class="cstat-no" title="statement not covered" >            next();</span>
+        }
+    }
+}
+&nbsp;
+var bulkCreateBatchNumber=<span class="fstat-no" title="function not covered" >function(tenantUUID, batchNORuleUUID,  params, callback){</span>
+<span class="cstat-no" title="statement not covered" >    if ( !utils.checkUUID(tenantUUID) &amp;&amp; !utils.checkUUID(batchNORuleUUID)) {</span>
+<span class="cstat-no" title="statement not covered" >        var error = {</span>
+            status: 400,
+            description: '输入参数有误'
+        }
+<span class="cstat-no" title="statement not covered" >        common.errReturnCallback(error, callback)</span>
+    }
+<span class="cstat-no" title="statement not covered" >    var info = params;</span>
+<span class="cstat-no" title="statement not covered" >    info.batchNORuleUUID = batchNORuleUUID;</span>
+<span class="cstat-no" title="statement not covered" >    var dateFormat = moment(new Date()).format('YYYY-MM-DD');</span>
+<span class="cstat-no" title="statement not covered" >    var queryStr = 'createAt= \'' + dateFormat + '\'';</span>
+<span class="cstat-no" title="statement not covered" >    var getBatchNORules = batchNumbersProxy.getBatchNORules(info.batchNORuleUUID);</span>
+<span class="cstat-no" title="statement not covered" >    var dateJudge = serialNumbersModel.getSerialNumber(queryStr);</span>
+<span class="fstat-no" title="function not covered" >    function createBatchNumber(info) {</span>
+<span class="cstat-no" title="statement not covered" >        return new Promise( (resolve) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >            batchNumbersProxy.createBatchNumber(info).then((result) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >                resolve(result);</span>
+            })
+        });
+    }
+<span class="cstat-no" title="statement not covered" >    var ep = new eventProxy();</span>
+<span class="cstat-no" title="statement not covered" >    ep.on('send_Message', <span class="fstat-no" title="function not covered" >function(bodyDataJson){</span></span>
+<span class="cstat-no" title="statement not covered" >        Promise.resolve(isTenantExist(tenantUUID)).then(<span class="fstat-no" title="function not covered" >function(result){</span></span>
+<span class="cstat-no" title="statement not covered" >            if (config.is_sendMessage) {</span>
+<span class="cstat-no" title="statement not covered" >                var message = new Message(MessageId.Create_Service_Success, bodyDataJson);</span>
+<span class="cstat-no" title="statement not covered" >                merchandiseComponentProducer.sendMessage(result.topic, message, <span class="fstat-no" title="function not covered" >function(error, data){</span></span>
+<span class="cstat-no" title="statement not covered" >                    console.log(error);</span>
+                });
+            }
+        });
+    });
+<span class="cstat-no" title="statement not covered" >    Promise.all([dateJudge, getBatchNORules]).then((result) =&gt;{</span>
+<span class="cstat-no" title="statement not covered" >        if(!result[1]){</span>
+<span class="cstat-no" title="statement not covered" >            throw result[1];</span>
+        }else {
+<span class="cstat-no" title="statement not covered" >            var batchRule = result[1][0].rule;</span>
+<span class="cstat-no" title="statement not covered" >            var complementCode = result[1][0].complementCode;</span>
+<span class="cstat-no" title="statement not covered" >            var yChars = '', fChars = '';</span>
+<span class="cstat-no" title="statement not covered" >            var batchArray = batchRule.split('');</span>
+<span class="cstat-no" title="statement not covered" >            for (var i = 0; i &lt; batchArray.length; i++) {</span>
+<span class="cstat-no" title="statement not covered" >                switch (batchArray[i]) {</span>
+                    case 'Y':
+<span class="cstat-no" title="statement not covered" >                        yChars += 'Y';</span>
+<span class="cstat-no" title="statement not covered" >                        break;</span>
+                    case 'F':
+<span class="cstat-no" title="statement not covered" >                        fChars += 'F';</span>
+<span class="cstat-no" title="statement not covered" >                        break;</span>
+                    case '0':
+<span class="cstat-no" title="statement not covered" >                        fChars += '0';</span>
+<span class="cstat-no" title="statement not covered" >                        break;</span>
+<span class="cstat-no" title="statement not covered" >                        break;</span>
+                }
+            }
+<span class="cstat-no" title="statement not covered" >            var judgeSerial;</span>
+<span class="cstat-no" title="statement not covered" >            if (result[0].length&gt; 0&amp;&amp;result[0][0].createAt == dateFormat) {</span>
+<span class="cstat-no" title="statement not covered" >                if (result[0][0].batchNumber &lt; parseInt(fChars, 16)) {</span>
+<span class="cstat-no" title="statement not covered" >                    judgeSerial = serialNumbersModel.updateSerialNumber(result[0][0].createAt, 'batchNumber', (result[0][0].batchNumber + 1));</span>
+                } else {
+<span class="cstat-no" title="statement not covered" >                    return false;</span>
+                }
+            } else {
+<span class="cstat-no" title="statement not covered" >                var infoSerial = {</span>
+                    'batchNumber': 1,
+                    'createAt': dateFormat
+                }
+<span class="cstat-no" title="statement not covered" >                judgeSerial = serialNumbersModel.createSerialNumber(infoSerial);</span>
+            }
+<span class="cstat-no" title="statement not covered" >            return Promise.all([judgeSerial,info, fChars, batchRule, complementCode, yChars]);</span>
+        }
+    }).then((allResult) =&gt;{
+<span class="cstat-no" title="statement not covered" >        if(allResult[0].length&lt;1){</span>
+<span class="cstat-no" title="statement not covered" >            throw allResult[0]</span>
+        }else{
+<span class="cstat-no" title="statement not covered" >            var batchRule = allResult[3];</span>
+<span class="cstat-no" title="statement not covered" >            var fChars = allResult[2];</span>
+<span class="cstat-no" title="statement not covered" >            var complementCode = allResult[4];</span>
+<span class="cstat-no" title="statement not covered" >            var year = new Date().getFullYear().toString();</span>
+<span class="cstat-no" title="statement not covered" >            var yChars = allResult[5];</span>
+<span class="cstat-no" title="statement not covered" >            var serialLength;</span>
+<span class="cstat-no" title="statement not covered" >            var batchRuleByChange;</span>
+<span class="cstat-no" title="statement not covered" >            return  dateJudge.then((dateResult) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >                switch (yChars.length){</span>
+                    case 1:
+<span class="cstat-no" title="statement not covered" >                        batchRuleByChange = batchRule.replace(/Y/, year.substr(4,1));</span>
+<span class="cstat-no" title="statement not covered" >                        break;</span>
+                    case 2:
+<span class="cstat-no" title="statement not covered" >                        batchRuleByChange =  batchRule.replace(/YY/,year.substr(3,2));</span>
+<span class="cstat-no" title="statement not covered" >                        break;</span>
+                    case 4:
+<span class="cstat-no" title="statement not covered" >                        batchRuleByChange = batchRule.replace(/YYYY/, 2016);</span>
+<span class="cstat-no" title="statement not covered" >                        break</span>
+<span class="cstat-no" title="statement not covered" >                        break;</span>
+                }
+<span class="cstat-no" title="statement not covered" >                var reg = new RegExp(fChars);</span>
+<span class="cstat-no" title="statement not covered" >                if(fChars.indexOf('F')&gt;=0){</span>
+<span class="cstat-no" title="statement not covered" >                    if(dateResult[0].batchNumber.toString(16).length &lt; fChars.length) {</span>
+<span class="cstat-no" title="statement not covered" >                        serialLength = fChars.length - dateResult[0].batchNumber.toString(16).length;</span>
+<span class="cstat-no" title="statement not covered" >                        for (var i = 0; i &lt; fChars.length - 1; i++) {</span>
+<span class="cstat-no" title="statement not covered" >                            complementCode += complementCode;</span>
+                        }
+<span class="cstat-no" title="statement not covered" >                        batchRuleByChange = batchRuleByChange.replace(reg, complementCode.concat(dateResult[0].batchNumber));</span>
+                    }else <span class="cstat-no" title="statement not covered" >if(dateResult[0].batchNumber.toString(16).length == fChars.length){</span>
+<span class="cstat-no" title="statement not covered" >                        batchRuleByChange = batchRuleByChange.replace(reg, complementCode.concat(dateResult[0].batchNumber));</span>
+                    }else{
+<span class="cstat-no" title="statement not covered" >                        return false;</span>
+                    }
+                }else  <span class="cstat-no" title="statement not covered" >if(fChars.indexOf('0')&gt;=0){</span>
+<span class="cstat-no" title="statement not covered" >                    if(dateResult[0].batchNumber.length &lt; fChars.length){</span>
+<span class="cstat-no" title="statement not covered" >                        serialLength = fChars.length - dateResult[0].batchNumber.length;</span>
+<span class="cstat-no" title="statement not covered" >                        for(var i =0;i&lt;serialLength; i++){</span>
+<span class="cstat-no" title="statement not covered" >                            complementCode += complementCode;</span>
+                        }
+<span class="cstat-no" title="statement not covered" >                        batchRuleByChange = batchRuleByChange.replace(reg, complementCode.concat(dateResult[0].batchNumber));</span>
+                    }else <span class="cstat-no" title="statement not covered" >if(dateResult[0].batchNumber.toString(16).length == fChars.length){</span>
+<span class="cstat-no" title="statement not covered" >                        batchRuleByChange = batchRuleByChange.replace(reg, complementCode.concat(dateResult[0].batchNumber));</span>
+                    }else{
+<span class="cstat-no" title="statement not covered" >                        return false;</span>
+                    }
+                }else{
+<span class="cstat-no" title="statement not covered" >                    return false;</span>
+                }
+<span class="cstat-no" title="statement not covered" >                var month = new Date().getMonth() + 1;</span>
+<span class="cstat-no" title="statement not covered" >                var week = new Date().getDay();</span>
+<span class="cstat-no" title="statement not covered" >                var monthChange = (month&lt;10?'0':'') +month;</span>
+<span class="cstat-no" title="statement not covered" >                var weekChange = '0' + week;</span>
+<span class="cstat-no" title="statement not covered" >                batchRuleByChange = batchRuleByChange.replace(/WW/, weekChange);</span>
+<span class="cstat-no" title="statement not covered" >                batchRuleByChange = batchRuleByChange.replace(/MM/, monthChange);</span>
+<span class="cstat-no" title="statement not covered" >                batchRuleByChange = batchRuleByChange.replace(/DD/, new Date().getDate());</span>
+<span class="cstat-no" title="statement not covered" >                info.batchNumber = batchRuleByChange;</span>
+<span class="cstat-no" title="statement not covered" >                return createBatchNumber(info);</span>
+            });
+        }
+    }).then((Result)=&gt; {
+<span class="cstat-no" title="statement not covered" >        var bodyDataJson = returnResources.generateBatchNumbersRetInfo(tenantUUID, Result[0]);</span>
+<span class="cstat-no" title="statement not covered" >        ep.emit('send_Message', bodyDataJson);</span>
+<span class="cstat-no" title="statement not covered" >        callback(null, bodyDataJson);</span>
+    }).catch((err) =&gt; {
+<span class="cstat-no" title="statement not covered" >        common.errReturnCallback(err, callback);</span>
+<span class="cstat-no" title="statement not covered" >        return;</span>
+    });
+};
+&nbsp;
+var bulkDeleteBatchNumber=<span class="fstat-no" title="function not covered" >function(tenantUUID, batchNORuleUUID, batchNumberUUID,  callback){</span>
+<span class="cstat-no" title="statement not covered" >    if ( !utils.checkUUID(tenantUUID)&amp;&amp; !utils.checkUUID(batchNumberUUID)&amp;&amp; !utils.checkUUID(batchNORuleUUID)) {</span>
+<span class="cstat-no" title="statement not covered" >        var error;</span>
+<span class="cstat-no" title="statement not covered" >        error.status=400;</span>
+<span class="cstat-no" title="statement not covered" >        error.description='输入参数有误';</span>
+<span class="cstat-no" title="statement not covered" >        common.errReturnCallback(error, callback);</span>
+    }
+<span class="cstat-no" title="statement not covered" >    var uuid= batchNumberUUID;</span>
+<span class="cstat-no" title="statement not covered" >    var getExist = isExist(null, uuid);</span>
+<span class="cstat-no" title="statement not covered" >    var ep = new eventProxy();</span>
+<span class="cstat-no" title="statement not covered" >    ep.on('send_Message', <span class="fstat-no" title="function not covered" >function(){</span></span>
+<span class="cstat-no" title="statement not covered" >        Promise.resolve(isTenantExist(tenantUUID)).then(<span class="fstat-no" title="function not covered" >function(result){</span></span>
+<span class="cstat-no" title="statement not covered" >            if (config.is_sendMessage) {</span>
+<span class="cstat-no" title="statement not covered" >                var message = new Message(MessageId.Delete_Service_Success, 204);</span>
+<span class="cstat-no" title="statement not covered" >                merchandiseComponentProducer.sendMessage(result.topic, message, <span class="fstat-no" title="function not covered" >function(error, data){</span></span>
+<span class="cstat-no" title="statement not covered" >                    console.log(error);</span>
+                });
+            }
+        });
+    });
+<span class="cstat-no" title="statement not covered" >    const deleteBatchNumber= (batchNumberUUID) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >        return Promise.resolve(batchNumbersProxy.deleteBatchNumber(batchNumberUUID));</span>
+    }
+<span class="cstat-no" title="statement not covered" >    getExist.then((results) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >        if(results.flag==4){</span>
+<span class="cstat-no" title="statement not covered" >            throw results;</span>
+        } else{
+<span class="cstat-no" title="statement not covered" >            return deleteBatchNumber(uuid);</span>
+        }
+    }).then(() =&gt; {
+<span class="cstat-no" title="statement not covered" >        ep.emit('send_Message');</span>
+<span class="cstat-no" title="statement not covered" >        callback(null, 204);</span>
+<span class="cstat-no" title="statement not covered" >        return;</span>
+    }).catch((err) =&gt; {
+<span class="cstat-no" title="statement not covered" >        common.errReturnCallback(err, callback);</span>
+<span class="cstat-no" title="statement not covered" >        return;</span>
+    })
+};
+&nbsp;
+var bulkRetrieveBatchNumber=<span class="fstat-no" title="function not covered" >function(tenantUUID, batchNORuleUUID, batchNumberUUID,  queryConditions, callback){</span>
+<span class="cstat-no" title="statement not covered" >    if ( !utils.checkUUID(tenantUUID)&amp;&amp;!utils.checkUUID(batchNumberUUID)&amp;&amp;!utils.checkUUID(batchNORuleUUID)) {</span>
+<span class="cstat-no" title="statement not covered" >        var error;</span>
+<span class="cstat-no" title="statement not covered" >        error.status=400;</span>
+<span class="cstat-no" title="statement not covered" >        error.description='输入参数有误';</span>
+<span class="cstat-no" title="statement not covered" >        common.errReturnCallback(error, callback);</span>
+    }
+<span class="cstat-no" title="statement not covered" >    var getExist = isExist(null, batchNumberUUID);</span>
+<span class="cstat-no" title="statement not covered" >    var expandStr=queryConditions.expand;</span>
+<span class="cstat-no" title="statement not covered" >    const retrieveBatchNumber = (uuid ) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >        return Promise.resolve(batchNumbersProxy.retrieveBatchNumber(uuid ));</span>
+    }
+<span class="cstat-no" title="statement not covered" >    retrieveBatchNumber(batchNumberUUID).then((results) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >        var judge = common.isOnly(null, results.length);</span>
+<span class="cstat-no" title="statement not covered" >        if(judge.is) {</span>
+<span class="cstat-no" title="statement not covered" >            var bodyDataJson = returnResources.generateBatchNumbersRetInfo(tenantUUID, results[0]);</span>
+<span class="cstat-no" title="statement not covered" >            if(!expandStr){</span>
+<span class="cstat-no" title="statement not covered" >                return bodyDataJson;</span>
+            }
+<span class="cstat-no" title="statement not covered" >            return getExpandStr(expandStr, results[0], tenantUUID).then(<span class="fstat-no" title="function not covered" >function(result){</span></span>
+<span class="cstat-no" title="statement not covered" >                for(var x in result){</span>
+<span class="cstat-no" title="statement not covered" >                    if(result[x].tag =='tenant'){</span>
+<span class="cstat-no" title="statement not covered" >                        var resultTenant = returnResources.generateTenantRetInfo( result[x])</span>
+<span class="cstat-no" title="statement not covered" >                        bodyDataJson['tenants'] =resultTenant;</span>
+                    }
+<span class="cstat-no" title="statement not covered" >                    if(result[x].tag =='batchNORule'){</span>
+<span class="cstat-no" title="statement not covered" >                        var resultBatchNORule = returnResources.generateBatchNORuleRetInfo(result[x]);</span>
+<span class="cstat-no" title="statement not covered" >                        bodyDataJson['batchNORules'] =resultBatchNORule;</span>
+                    }
+                }
+<span class="cstat-no" title="statement not covered" >                return bodyDataJson;</span>
+            });
+        }
+<span class="cstat-no" title="statement not covered" >        var error = judge.error;</span>
+<span class="cstat-no" title="statement not covered" >        if(judge.flag == 1) {</span>
+<span class="cstat-no" title="statement not covered" >            error.description = 'Could not find the resources you want to retrieve batchNumber.the uuid: ' + batchNumberUUID;</span>
+        } else <span class="cstat-no" title="statement not covered" >if(judge.flag == 2) {</span>
+<span class="cstat-no" title="statement not covered" >            error.description = 'Find much resource when retrieve batchNumber. the uuid: ' + batchNumberUUID;</span>
+        }
+    }).then((bodyInfo) =&gt; {
+<span class="cstat-no" title="statement not covered" >        callback(null, bodyInfo);</span>
+<span class="cstat-no" title="statement not covered" >        return;</span>
+    }).catch((err) =&gt; {
+<span class="cstat-no" title="statement not covered" >        common.errReturnCallback(err, callback);</span>
+<span class="cstat-no" title="statement not covered" >        return;</span>
+    });
+};
+&nbsp;
+var bulkListBatchNumber=<span class="fstat-no" title="function not covered" >function( tenantUUID, batchNORuleUUID,  queryConditions, callback){</span>
+<span class="cstat-no" title="statement not covered" >    if (!utils.checkUUID(tenantUUID)&amp;&amp;!utils.checkUUID(batchNORuleUUID)) {</span>
+<span class="cstat-no" title="statement not covered" >        var error = {</span>
+            status: 400,
+            description: '输入参数有误'
+        }
+<span class="cstat-no" title="statement not covered" >        common.errReturnCallback(error, callback);</span>
+    }
+<span class="cstat-no" title="statement not covered" >    var expandStr=queryConditions.expand;</span>
+<span class="cstat-no" title="statement not covered" >    var offset = common.ifNotReturnNum(Number(queryConditions.offset), 0);</span>
+<span class="cstat-no" title="statement not covered" >    var limit = common.ifNotReturnNum(Number(queryConditions.limit), 25);</span>
+<span class="cstat-no" title="statement not covered" >    var judgeQuery = common.isValidQueryParams2(queryConditions, isValidQueryCondition, null);</span>
+<span class="cstat-no" title="statement not covered" >    var listSuccess = Promise.resolve(batchNumbersProxy.queryBatchNumber(queryConditions, offset, limit));</span>
+<span class="cstat-no" title="statement not covered" >    var countSuccess = Promise.resolve(batchNumbersProxy.getCount(queryConditions));</span>
+<span class="cstat-no" title="statement not covered" >    Promise.all([judgeQuery, listSuccess, countSuccess]).then((result) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >        if (result[0].is == false) {</span>
+<span class="cstat-no" title="statement not covered" >            throw result[0];</span>
+        }
+<span class="cstat-no" title="statement not covered" >        if (result[1].length == 0) {</span>
+<span class="cstat-no" title="statement not covered" >            result[1] = new Array();</span>
+        }
+<span class="cstat-no" title="statement not covered" >        if(!expandStr){</span>
+<span class="cstat-no" title="statement not covered" >            return  returnResources.generateListBatchNumbersRetInfo(tenantUUID, batchNORuleUUID, queryConditions, offset, result[2][0], result[1]);</span>
+        }
+<span class="cstat-no" title="statement not covered" >        var listResult = new Array;</span>
+<span class="cstat-no" title="statement not covered" >        var item;</span>
+<span class="cstat-no" title="statement not covered" >        for ( item in result[1]) {</span>
+<span class="cstat-no" title="statement not covered" >            (<span class="fstat-no" title="function not covered" >function(item){</span></span>
+<span class="cstat-no" title="statement not covered" >                listResult[item] = getExpandStr(expandStr, result[1][item], tenantUUID).then(<span class="fstat-no" title="function not covered" >function (resultExpand) {</span></span>
+<span class="cstat-no" title="statement not covered" >                    for (var x in resultExpand) {</span>
+<span class="cstat-no" title="statement not covered" >                        if (resultExpand[x].tag == 'tenant') {</span>
+<span class="cstat-no" title="statement not covered" >                            result[1][item].tenants = returnResources.generateTenantRetInfo( resultExpand[x])</span>
+                        }
+<span class="cstat-no" title="statement not covered" >                        if (resultExpand[x].tag == 'batchNORule') {</span>
+<span class="cstat-no" title="statement not covered" >                            result[1][item].batchNORules = returnResources.generateBatchNORuleRetInfo(resultExpand[x])</span>
+                        }
+                    }
+<span class="cstat-no" title="statement not covered" >                    return result[1][item];</span>
+                });
+            }(item));
+        }
+<span class="cstat-no" title="statement not covered" >        return Promise.all(listResult).then(<span class="fstat-no" title="function not covered" >function(bodyResult){</span></span>
+<span class="cstat-no" title="statement not covered" >            return  returnResources.generateListBatchNumbersRetInfo(tenantUUID, batchNORuleUUID, queryConditions, offset, result[2], bodyResult);</span>
+        });
+    }).then((bodyInfo) =&gt; {
+<span class="cstat-no" title="statement not covered" >            callback(null, bodyInfo);</span>
+<span class="cstat-no" title="statement not covered" >            return;</span>
+        }
+    ).catch( (err) =&gt; {
+<span class="cstat-no" title="statement not covered" >        common.errReturnCallback(err, callback);</span>
+<span class="cstat-no" title="statement not covered" >        return;</span>
+    });
+};
+&nbsp;
+exports.bulkOperator = <span class="fstat-no" title="function not covered" >function(active, url, urlPath,  params, callback) {</span>
+<span class="cstat-no" title="statement not covered" >    var tenantUUID ='', isList=false, batchNORuleUUID= '', batchNumberUUID= '',  queryConditions='';</span>
+<span class="cstat-no" title="statement not covered" >    if(utils.isBatchNumbersURL(url)){</span>
+<span class="cstat-no" title="statement not covered" >        tenantUUID =utils.getUUIDInHref(urlPath, 'tenants/', '/batchNORules');</span>
+<span class="cstat-no" title="statement not covered" >        batchNORuleUUID =utils.getUUIDInHref(urlPath, 'batchNORules/', '/batchNumbers');</span>
+<span class="cstat-no" title="statement not covered" >        batchNumberUUID=utils.getUUIDInHref(urlPath, 'batchNumbers/');</span>
+    }else <span class="cstat-no" title="statement not covered" >if(utils.isBatchNumberURL(url)){</span>
+<span class="cstat-no" title="statement not covered" >        tenantUUID =utils.getUUIDInHref(urlPath, 'tenants/', '/batchNORules');</span>
+<span class="cstat-no" title="statement not covered" >        batchNORuleUUID =utils.getUUIDInHref(urlPath, 'batchNORules/', '/batchNumbers');</span>
+<span class="cstat-no" title="statement not covered" >        isList=true;</span>
+    }
+<span class="cstat-no" title="statement not covered" >    if(active=='post'){</span>
+<span class="cstat-no" title="statement not covered" >        bulkCreateBatchNumber(tenantUUID, batchNORuleUUID,  params, callback);</span>
+    }else <span class="cstat-no" title="statement not covered" >if(active=='delete'){</span>
+<span class="cstat-no" title="statement not covered" >        bulkDeleteBatchNumber(tenantUUID, batchNORuleUUID, batchNumberUUID,  callback);</span>
+    }else <span class="cstat-no" title="statement not covered" >if(active=='get'){</span>
+<span class="cstat-no" title="statement not covered" >        queryConditions=utils.parseUrlParam(url);</span>
+<span class="cstat-no" title="statement not covered" >        if(isList){</span>
+<span class="cstat-no" title="statement not covered" >            bulkListBatchNumber(tenantUUID, batchNORuleUUID, queryConditions, callback);</span>
+        }else{
+<span class="cstat-no" title="statement not covered" >            bulkRetrieveBatchNumber(tenantUUID, batchNORuleUUID, batchNumberUUID, queryConditions, callback);</span>
+        }
+    }
+}</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Thu Jul 14 2016 11:09:59 GMT+0800 (中国标准时间)
+</div>
+</div>
+<script src="../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../sorter.js"></script>
+</body>
+</html>
